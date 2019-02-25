@@ -75,3 +75,10 @@
 	font-size: 2.0em;
 	color: #212121;
 }
+
+#Footer {
+	text-align: center;
+	height:35vh;
+	background: #FF2D36;
+	color: #fff;
+}
