@@ -1,5 +1,30 @@
 /* HOME OF OUR UNIFIED CSS*/
-h1{
-	color: orange;
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+.container-fluid{
+	padding: 0px;
+	border: 0px;
+}
+
+#main {
 	text-align: center;
+	padding: 0px;
+}
+
+#paralax-text {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 500px;
+	color: #fff;
+}
+
+#body-text {
+	min-height: 700px;
+	padding: 50px;
+
 }
