@@ -68,14 +68,14 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 76vh;
+	height: 91vh;
 	color: #fff;
 	text-align: left;
 }
 
 #paralax-text h1{
-	padding-top: 60px;
-	font-size: 5.5em;
+  padding-top: 135px;
+	font-size: 6.0em;
 	font-weight: 400;
 	line-height: 50px;
 }
