@@ -10,6 +10,29 @@
 	border: 0px;
 }
 
+.btn-signup {
+  background-color: #fff !important;
+  color: #FF2D36 !important;
+  border-radius: 0 !important;
+}
+
+.btn-signup:hover {
+  background-color: #FF2D36 !important;
+  color: #fff !important;
+}
+
+.btn-login {
+  background-color: #FF2D36 !important;
+  border-color: #fff !important;
+  border-width: medium !important;
+  border-radius: 0 !important;
+  color: #fff;
+}
+
+.btn-login:hover {
+  border-width: 0 !important;
+}
+
 #main {
 	font-family: "Raleway";
 	text-align: center;
@@ -21,6 +44,23 @@
 	background: #FF2D36;
 	color: #fff;
 	border-bottom: 20px solid #fff;
+}
+
+#user-pills {
+  align-items: center;
+	justify-content: center;
+}
+
+#signup {
+  height: 50px;
+  width: 160px;
+  font-size: 1.5em;
+}
+
+#login {
+  height: 50px;
+  width: 160px;
+  font-size: 1.5em;
 }
 
 #paralax-text {
