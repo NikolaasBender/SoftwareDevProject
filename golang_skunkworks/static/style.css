@@ -122,3 +122,33 @@
 	background: #FF2D36;
 	color: #fff;
 }
+
+#signinsheet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-image: url("../assets/desert_1.jpg");
+  background-size: cover;
+}
+
+#signinsheet .container {
+  align-items: center;
+  justify-content: center;
+}
+
+#signinsheet .container .jumbotron {
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 0;
+  border-left: 10px solid #fff;
+}
+
+#forms button:hover{
+  background-color: #fff !important;
+  color: #FF2D36 !important;
+  border-width: medium !important;
+
+}
