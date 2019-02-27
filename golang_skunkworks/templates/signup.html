@@ -19,9 +19,9 @@
   </head>
   <body>
       <div class="container-fluid" id="main">
-        <div class="nav fixed-top" id="topbar">
+        <div class="navbar-header" id="topbar">
           <div class="navbar-brand">
-            <a href="../templates/index.html" style="color:inherit;text-decoration:none;">
+            <a href="../templates/index.html" style="color:inherit !important;text-decoration:none;">
               <h1 style="font-weight:900;">
                 Project
                 <span style="font-weight:700;color:#adadad;">
@@ -43,8 +43,16 @@
                     <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
                   </div>
                   <div class="form-group">
+                    <label for="name">Display Name:</label>
+                    <input type="name" class="form-control" id="name" placeholder="Enter your name" name="name">
+                  </div>
+                  <div class="form-group">
                     <label for="pwd">Password:</label>
                     <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+                  </div>
+                  <div class="form-group">
+                    <label for="pwd">Re-Enter Password:</label>
+                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd2">
                   </div>
                   <div class="checkbox">
                     <label><input type="checkbox"> Remember me</label>
@@ -52,6 +60,8 @@
                   <button type="submit" class="btn btn-login">Submit</button>
                 </form>
               </div>
+              <br></br>
+              <p>Already have a [ProjectName] account?<a href="../templates/login.html"> log in here!</a></p>
             </div>
           </div>
         </div>
