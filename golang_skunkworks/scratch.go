@@ -41,6 +41,7 @@ type Page struct {
 	Body  []byte
 }
 
+//THIS MIGHT NEED TO BE REMOVED
 func (p *Page) save() error {
 	filename := p.Title + ".txt"
 	return ioutil.WriteFile(filename, p.Body, 0600)
