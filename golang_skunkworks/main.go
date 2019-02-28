@@ -1,6 +1,7 @@
 package main
 
 import (
+	//"assets"
 	"bytes"
 	"context"
 	"fmt"
@@ -12,10 +13,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/meshhq/golang-html-template-tutorial/assets"
+	//assets "homeMade"
 
 	"github.com/gorilla/mux"
-	
+
 	"github.com/gorilla/sessions"
 )
 
@@ -24,41 +25,9 @@ var navigationBarHTML string
 var homepageTpl *template.Template
 var secondViewTpl *template.Template
 var thirdViewTpl *template.Template
+var indexViewTpl *template.Template
+var aboutViewTpl *template.Template
 
-func init() {
-	navigationBarHTML = assets.MustAssetString("templates/navigation_bar.html")
-
-	homepageHTML := assets.MustAssetString("templates/index.html")
-	homepageTpl = template.Must(template.New("homepage_view").Parse(homepageHTML))
-
-	secondViewHTML := assets.MustAssetString("templates/second_view.html")
-	secondViewTpl = template.Must(template.New("second_view").Parse(secondViewHTML))
-
-	thirdViewFuncMap := ThirdViewFormattingFuncMap()
-	thirdViewHTML := assets.MustAssetString("templates/third_view.html")
-	thirdViewTpl = template.Must(template.New("third_view").Funcs(thirdViewFuncMap).Parse(thirdViewHTML))
-}
-
-func main() {
-	serverCfg := Config{
-		Host:         "localhost:5000",
-		ReadTimeout:  5 * time.Second,
-		WriteTimeout: 5 * time.Second,
-	}
-	htmlServer := Start(serverCfg)
-
-	http.HandleFunc("/secret", secret)
-	http.HandleFunc("/login", login)
-	http.HandleFunc("/logout", logout)
-
-	defer htmlServer.Stop()
-
-	sigChan := make(chan os.Signal, 1)
-	signal.Notify(sigChan, os.Interrupt)
-	<-sigChan
-
-	fmt.Println("main : shutting down")
-}
 
 // Config provides basic configuration
 type Config struct {
@@ -73,6 +42,47 @@ type HTMLServer struct {
 	wg     sync.WaitGroup
 }
 
+
+func init() {
+	//navigationBarHTML = assets.MustAssetString("templates/navigation_bar.html")
+
+	// homepageHTML := assets.MustAssetString("templates/index.html")
+	// homepageTpl = template.Must(template.New("homepage_view").Parse(homepageHTML))
+	homepageTpl = template.Must(template.ParseFiles("index.html"))
+
+	// secondViewHTML := assets.MustAssetString("templates/second_view.html")
+	// secondViewTpl = template.Must(template.New("second_view").Parse(secondViewHTML))
+
+	// // aboutViewHTML := assets.MustAssetString("templates/about.html")
+	// // aboutViewTpl = template.Must(template.New("about").Parse(aboutViewHTML))
+
+	// thirdViewFuncMap := ThirdViewFormattingFuncMap()
+	// thirdViewHTML := assets.MustAssetString("templates/third_view.html")
+	// thirdViewTpl = template.Must(template.New("third_view").Funcs(thirdViewFuncMap).Parse(thirdViewHTML))
+
+}
+
+func main() {
+	serverCfg := Config{
+		Host:         "localhost:5000",
+		ReadTimeout:  5 * time.Second,
+		WriteTimeout: 5 * time.Second,
+	}
+	htmlServer := Start(serverCfg)
+
+	// http.HandleFunc("/secret", secret)
+	// http.HandleFunc("/login", login)
+	// http.HandleFunc("/logout", logout)
+
+	defer htmlServer.Stop()
+
+	sigChan := make(chan os.Signal, 1)
+	signal.Notify(sigChan, os.Interrupt)
+	<-sigChan
+
+	fmt.Println("main : shutting down")
+}
+
 // Start launches the HTML Server
 func Start(cfg Config) *HTMLServer {
 	// Setup Context
@@ -84,6 +94,8 @@ func Start(cfg Config) *HTMLServer {
 	router.HandleFunc("/", HomeHandler)
 	router.HandleFunc("/second", SecondHandler)
 	router.HandleFunc("/third/{number}", ThirdHandler)
+	router.HandleFunc("/index", IndexHandler)
+	router.HandleFunc("/About", AboutHandler)
 	router.HandleFunc("/login", login)
 	router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 
@@ -203,11 +215,34 @@ func ThirdHandler(w http.ResponseWriter, r *http.Request) {
 	render(w, r, thirdViewTpl, "third_view", fullData)
 }
 
+// IndexHandler renders the index view template
+func IndexHandler(w http.ResponseWriter, r *http.Request) {
+	push(w, "/static/style.css")
+	push(w, "/static/navigation_bar.css")
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+
+	fullData := map[string]interface{}{
+		"NavigationBar": template.HTML(navigationBarHTML),
+	}
+	render(w, r, indexViewTpl, "index", fullData)
+}
+
+// AboutHandler renders the about view template
+func AboutHandler(w http.ResponseWriter, r *http.Request) {
+	push(w, "/static/style.css")
+	push(w, "/static/navigation_bar.css")
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+
+	fullData := map[string]interface{}{
+		"NavigationBar": template.HTML(navigationBarHTML),
+	}
+	render(w, r, aboutViewTpl, "about", fullData)
+}
 
 //SECURITY
 var (
 	// key must be 16, 24 or 32 bytes long (AES-128, AES-192 or AES-256)
-	key = []byte("super-secret-key")
+	key   = []byte("super-secret-key")
 	store = sessions.NewCookieStore(key)
 )
 
