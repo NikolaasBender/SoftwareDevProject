@@ -1,0 +1,8 @@
+CSS GOES IN ASSETS
+IMAGES GO IN ASSETS
+
+DYNAMIC HTML GOES IN VIEWS (ex: user page, project page)
+
+STATIC HTML GOES IN STATIC (ex: about, contact, stuff that is very universal)
+
+INDEX GOES IN THE HIGHEST DIRECTORY

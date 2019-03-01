@@ -1,0 +1,10 @@
+TODO:
+*   1) Serve web pages correctly (TIED HEAVILY TO 4)
+*   2) Get form data from web page
+    3) Learn templates
+        3.1) look it up / research
+        3.2) demo stuff get a basic version working
+        3.3) get front end team to build more complex stuff for us
+*   4) Get routing working correctly
+    5) Clean out anything we dont need
+    Bonus: Make fun of front end team because they're nerds!
