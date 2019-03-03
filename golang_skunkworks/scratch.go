@@ -2,7 +2,7 @@ package main
 
 import (
 	//"html/template"
-	"io/ioutil"
+	"fmt"
 	"log"
 	"net/http"
 
@@ -17,15 +17,11 @@ func newRouter() *mux.Router {
 	//r.HandleFunc("/", general).Methods("GET")
 	//THIS IS THE NEW METHOD THAT WORKS
 	//TO FUTURE NICK: SEE IF YOU CAN PUT THIS INTO A FUNCTION
-	// staticFileDirectory := http.Dir("./assets/")
-	// staticFileHandler := http.StripPrefix("/assets/", http.FileServer(staticFileDirectory))
 	// r.PathPrefix("/assets/").Handler(staticFileHandler).Methods("GET")
+	fmt.Println("'" + r.URL.Path[1:] + "'")
 	r.HandleFunc("/", HomeHandler)
-	//YOU'RE GONNA WANNA CHANGE THESE. YOU MIGHT WANT PROJECTS TO BE UNDER USERS
-	//r.HandleFunc("/projects/{project}", ProjectHandler)
-	//r.HandleFunc("/user", UserHandler)
-
-	http.Handle("/", r)
+	//r.PathPrefix("/").Handler(catchAllHandler) YOU NEED HANDLERS FOR OTHER STUFF TO JUSTIFY THIS
+	//http.Handle("/", r)
 	return r
 }
 
@@ -33,8 +29,9 @@ func main() {
 
 	//WE NEED A ROUTER
 	r := newRouter()
+	fmt.Println("loop?")
 	//RUNS THE SERVER
-	log.Fatal(http.ListenAndServe(":8080", r))
+	log.Fatal(http.ListenAndServe(":5050", r))
 }
 
 // func general(w http.ResponseWriter, r *http.Request) {
@@ -47,22 +44,17 @@ type Page struct {
 	Body  []byte
 }
 
-//THIS MIGHT NEED TO BE REMOVED
-func (p *Page) save() error {
-	filename := p.Title + ".txt"
-	return ioutil.WriteFile(filename, p.Body, 0600)
+func HomeHandler(w http.ResponseWriter, r *http.Request) {
+	//vars := mux.Vars(r)
+	w.WriteHeader(http.StatusOK)
+	fmt.Println("HOME HANDLER: '" + r.URL.Path[1:] + "'")
+	// if strings.Contains(vars["pagedesired"], ".html") == true {
+	// 	http.ServeFile(w, r, vars["pagedesired"])
+	// }
+	http.ServeFile(w, r, r.URL.Path[1:])
 }
 
-//THIS JUST DISPLAYS A TEXT FILE ON THE WEBPAGE
-//DEFINITELY USEFUL FOR STUFF - MAYBE IT CAN WORK WITH CSV?
-// func rawHandler(w http.ResponseWriter, r *http.Request) {
-// 	title := r.URL.Path[len("/view/"):]
-// 	p, _ := loadPage(title)
-// 	renderTemplate(w, "view", p)
-// }
-
-func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	// vars := mux.Vars(r)
+func CatchAllHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	http.ServeFile(w, r, r.URL.Path[1:])
 }

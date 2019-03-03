@@ -7,3 +7,6 @@ https://github.com/gorilla/mux
 
 MAKING THE ROUTING INTO SOMETHING USEFUL
 https://www.sohamkamani.com/blog/2017/09/13/how-to-build-a-web-application-in-golang/
+
+MIGHT HELP WITH SUBMITTING DATA
+https://stackoverflow.com/questions/41316794/golang-http-multiple-response-writeheader-calls
