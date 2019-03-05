@@ -41,7 +41,6 @@ type ContactDetails struct {
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	now := time.Now()
-	w.WriteHeader(http.StatusOK)
 	pathVariables := mux.Vars(r)
 	fmt.Println("HOME HANDLER: '" + pathVariables["page"] + "'" + "'" + r.URL.Path + "'")
 	PageVars := PageVariables{ //store the date and time in a struct
@@ -52,6 +51,17 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles(pathVariables["page"])
 
 	t.Execute(w, PageVars)
+	t, err := template.ParseFiles(pathVariables["page"])
+
+	if err != nil { // if there is an error
+		log.Print("template parsing error: ", err) // log it
+	}
+
+	err = t.Execute(w, PageVars)
+
+	if err != nil { // if there is an error
+  	  log.Print("template executing error: ", err) //log it
+  	}
 }
 
 func IndexHandle(w http.ResponseWriter, r *http.Request) {
