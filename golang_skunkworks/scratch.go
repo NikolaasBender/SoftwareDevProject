@@ -1,10 +1,11 @@
 package main
 
 import (
-	//"html/template"
 	"fmt"
+	"html/template"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/gorilla/mux"
 )
@@ -13,15 +14,9 @@ import (
 //VERY IMPORTANT
 func newRouter() *mux.Router {
 	r := mux.NewRouter()
-	//THIS IS FROM THE OLD METHOD...THE BUILT IN METHOD
-	//r.HandleFunc("/", general).Methods("GET")
-	//THIS IS THE NEW METHOD THAT WORKS
-	//TO FUTURE NICK: SEE IF YOU CAN PUT THIS INTO A FUNCTION
-	// r.PathPrefix("/assets/").Handler(staticFileHandler).Methods("GET")
-	fmt.Println("'" + r.URL.Path[1:] + "'")
-	r.HandleFunc("/", HomeHandler)
-	//r.PathPrefix("/").Handler(catchAllHandler) YOU NEED HANDLERS FOR OTHER STUFF TO JUSTIFY THIS
-	//http.Handle("/", r)
+	r.HandleFunc("/{page}", HomeHandler)
+	//r.HandleFunc("/second", SecondHandler)
+	//r.HandleFunc("/third/{number}", ThirdHandler)
 	return r
 }
 
@@ -34,24 +29,40 @@ func main() {
 	log.Fatal(http.ListenAndServe(":5050", r))
 }
 
-// func general(w http.ResponseWriter, r *http.Request) {
-// 	http.ServeFile(w, r, r.URL.Path[1:])
-// }
-
 //THE GERNERAL FORM OF A PAGE
 type Page struct {
 	Title string
 	Body  []byte
 }
 
+type PageVariables struct {
+	Date string
+	Time string
+}
+
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	//vars := mux.Vars(r)
+	now := time.Now()
 	w.WriteHeader(http.StatusOK)
-	fmt.Println("HOME HANDLER: '" + r.URL.Path[1:] + "'")
-	// if strings.Contains(vars["pagedesired"], ".html") == true {
-	// 	http.ServeFile(w, r, vars["pagedesired"])
-	// }
-	http.ServeFile(w, r, r.URL.Path[1:])
+	pathVariables := mux.Vars(r)
+	fmt.Println("HOME HANDLER: '" + pathVariables["page"] + "'" + "'" + r.URL.Path + "'")
+	//http.ServeFile(w, r, "/index.html")
+	PageVars := PageVariables{ //store the date and time in a struct
+		Date: now.Format("02-01-2006"),
+		Time: now.Format("15:04:05"),
+	}
+
+	t, err := template.ParseFiles(pathVariables["page"])
+
+	if err != nil { // if there is an error
+		log.Print("template parsing error: ", err) // log it
+	}
+
+	err = t.Execute(w, PageVars)
+
+	if err != nil { // if there is an error
+  	  log.Print("template executing error: ", err) //log it
+  	}
+
 }
 
 func CatchAllHandler(w http.ResponseWriter, r *http.Request) {

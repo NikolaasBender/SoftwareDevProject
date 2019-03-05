@@ -1,10 +1,64 @@
 <!DOCTYPE html>
 <html>
-    <body>
-        <div>
-            <form action="/login" method="post">
 
-            </form>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+<body class="container">
+    <form>
+        Nickname:<br>
+        <input type="text" name="nickname"><br>
+        Email address:<br>
+        <input type="text" name="email"><br>
+        Password:<br>
+        <input type="password" name="password"><br>
+        Gender:<br>
+        <input type="radio" name="gender" value="male" checked> Male<br>
+        <input type="radio" name="gender" value="female"> Female<br>
+        <input type="radio" name="gender" value="other"> Other<br>
+        Security question:<br>
+        <select name="securityQuestion">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="fiat">Fiat</option>
+            <option value="audi">Audi</option>
+        </select><br>
+        Answer:<br>
+        <input type="text" name="securityAnswer"><br>
+        Favorite Programming Languages: <br>
+        <div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" value="">c++
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" value="">Python
+                </label>
+            </div>
+            <div class="form-check disabled">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" value="">assembly
+                </label>
+            </div>
         </div>
-    </body>
+
+
+        Additional Information: <br>
+        <textarea rows="4" cols="50">
+
+            </textarea>
+    </form>
+</body>
+
 </html>
