@@ -24,7 +24,7 @@ func main() {
 
 	//WE NEED A ROUTER
 	r := newRouter()
-	fmt.Println("loop?")
+	//fmt.Println("loop?")
 	//RUNS THE SERVER
 	log.Fatal(http.ListenAndServe(":5050", r))
 }
@@ -42,7 +42,6 @@ type PageVariables struct {
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	now := time.Now()
-	w.WriteHeader(http.StatusOK)
 	pathVariables := mux.Vars(r)
 	fmt.Println("HOME HANDLER: '" + pathVariables["page"] + "'" + "'" + r.URL.Path + "'")
 	//http.ServeFile(w, r, "/index.html")
@@ -62,7 +61,6 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil { // if there is an error
   	  log.Print("template executing error: ", err) //log it
   	}
-
 }
 
 func CatchAllHandler(w http.ResponseWriter, r *http.Request) {
