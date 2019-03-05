@@ -14,8 +14,10 @@ import (
 //VERY IMPORTANT
 func newRouter() *mux.Router {
 	r := mux.NewRouter()
-	r.HandleFunc("/{page}", HomeHandler)
 	r.HandleFunc("/", IndexHandle)
+	r.HandleFunc("/login", LoginHandle)
+	//FINAL RESORT TO GET SOMETHING
+	r.HandleFunc("/{page}", HomeHandler)
 	//r.HandleFunc("/second", SecondHandler)
 	//r.HandleFunc("/third/{number}", ThirdHandler)
 	return r
@@ -51,17 +53,6 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles(pathVariables["page"])
 
 	t.Execute(w, PageVars)
-	t, err := template.ParseFiles(pathVariables["page"])
-
-	if err != nil { // if there is an error
-		log.Print("template parsing error: ", err) // log it
-	}
-
-	err = t.Execute(w, PageVars)
-
-	if err != nil { // if there is an error
-		log.Print("template executing error: ", err) //log it
-	}
 }
 
 func IndexHandle(w http.ResponseWriter, r *http.Request) {
@@ -71,7 +62,7 @@ func IndexHandle(w http.ResponseWriter, r *http.Request) {
 
 func LoginHandle(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
-	t, _ := template.ParseFiles("login.html")
+	t, _ := template.ParseFiles("login_test.html")
 	if r.Method != http.MethodPost {
 		t.Execute(w, nil)
 		return
