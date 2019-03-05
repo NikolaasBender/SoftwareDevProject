@@ -60,8 +60,8 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	err = t.Execute(w, PageVars)
 
 	if err != nil { // if there is an error
-  	  log.Print("template executing error: ", err) //log it
-  	}
+		log.Print("template executing error: ", err) //log it
+	}
 }
 
 func IndexHandle(w http.ResponseWriter, r *http.Request) {
@@ -83,7 +83,7 @@ func LoginHandle(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// do something with details
-	_ = details
+	fmt.Println(details)
 
 	t.Execute(w, struct{ Success bool }{true})
 }
