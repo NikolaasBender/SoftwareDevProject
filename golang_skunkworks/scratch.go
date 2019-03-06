@@ -16,6 +16,7 @@ func newRouter() *mux.Router {
 	r := mux.NewRouter()
 	r.HandleFunc("/", IndexHandle)
 	r.HandleFunc("/login", LoginHandle)
+	r.HandleFunc("/newCard", CardHandle)
 	//FINAL RESORT TO GET SOMETHING
 	r.HandleFunc("/{page}", HomeHandler)
 	//r.HandleFunc("/second", SecondHandler)
@@ -39,6 +40,11 @@ type PageVariables struct {
 type ContactDetails struct {
 	Username string
 	Password string
+}
+
+type Card struct {
+	//Add more when we figure out what actually goes in the card
+	Text string
 }
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
@@ -74,6 +80,23 @@ func LoginHandle(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// do something with details
+	fmt.Println(details)
+
+	t.Execute(w, struct{ Success bool }{true})
+}
+
+func CardHandle(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+	t, _ := template.ParseFiles("newCard.html")
+	if r.Method != http.MethodPost {
+		t.Execute(w, nil)
+		return
+	}
+	//will add more, just not sure what goes into a card
+	details := Card{
+		Text: r.FormValue("text"),
+	}
+
 	fmt.Println(details)
 
 	t.Execute(w, struct{ Success bool }{true})
