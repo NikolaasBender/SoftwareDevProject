@@ -10,3 +10,6 @@ https://www.sohamkamani.com/blog/2017/09/13/how-to-build-a-web-application-in-go
 
 MIGHT HELP WITH SUBMITTING DATA
 https://stackoverflow.com/questions/41316794/golang-http-multiple-response-writeheader-calls
+
+Sessions
+https://www.sohamkamani.com/blog/2018/03/25/golang-session-authentication/
