@@ -17,6 +17,7 @@ func newRouter() *mux.Router {
 	r := mux.NewRouter()
 	r.HandleFunc("/", IndexHandle)
 	r.HandleFunc("/login", LoginHandle)
+	r.HandleFunc("/formHandler", FormHandler)
 	r.HandleFunc("/newCard", CardHandle)
 	//FINAL RESORT TO GET SOMETHING
 	r.HandleFunc("/{page}", HomeHandler)

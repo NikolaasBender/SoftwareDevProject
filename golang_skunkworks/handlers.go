@@ -65,3 +65,28 @@ func CardHandle(w http.ResponseWriter, r *http.Request) {
 
 	t.Execute(w, struct{ Success bool }{true})
 }
+
+
+func FormHandler(w http.ResponseWriter, r *http.Request){
+	w.WriteHeader(http.StatusOK)
+	t, _ := template.ParseFiles("formTest.html")
+	if r.Method != http.MethodPost {
+		t.Execute(w, nil)
+		return
+	}
+
+	details := BigForm{
+		nickname: r.FormValue("nickname"),
+		email: r.FormValue("email"),
+		password: r.FormValue("password"),
+		gender: r.FormValue("gender"), 
+		securityQ: r.FormValue("securityQuestion"), 
+		languages: r.FormValue("Languages"),
+		textbox: r.FormValue("textbox"),
+	}
+
+	fmt.Println(details)
+
+	t.Execute(w, struct{ Success bool }{true})
+	
+}
