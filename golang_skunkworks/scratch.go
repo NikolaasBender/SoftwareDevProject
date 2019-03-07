@@ -1,11 +1,12 @@
 package main
 
 import (
-	"fmt"
-	"html/template"
+	//"fmt"
+	//"html/template"
 	"log"
 	"net/http"
-	"time"
+
+	//"time"
 
 	"github.com/gorilla/mux"
 )

@@ -3,13 +3,13 @@ package main
 import (
 	"fmt"
 	"html/template"
-	"log"
+
+	//"log"
 	"net/http"
 	"time"
 
 	"github.com/gorilla/mux"
 )
-
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	now := time.Now()
@@ -41,7 +41,6 @@ func LoginHandle(w http.ResponseWriter, r *http.Request) {
 	details := ContactDetails{
 		Username: r.FormValue("username"),
 		Password: r.FormValue("password"),
-		
 	}
 
 	// do something with details
