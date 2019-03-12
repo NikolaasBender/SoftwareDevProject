@@ -18,18 +18,17 @@ type ContactDetails struct {
 	Password string
 }
 
-type Card struct {
-	//Add more when we figure out what actually goes in the card
-	Text string
-}
-
-type BigForm struct{
-	nickname string
-	email string
-	password string
-	gender string
+type BigForm struct {
+	nickname  string
+	email     string
+	password  string
+	gender    string
 	securityQ string
 	languages string
-	textbox string
+	textbox   string
 }
 
+type Card struct {
+	Title   string
+	Content string
+}
