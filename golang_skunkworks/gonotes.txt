@@ -13,3 +13,4 @@ https://stackoverflow.com/questions/41316794/golang-http-multiple-response-write
 
 Sessions
 https://gowebexamples.com/sessions/
+http://www.gorillatoolkit.org/pkg/sessions
