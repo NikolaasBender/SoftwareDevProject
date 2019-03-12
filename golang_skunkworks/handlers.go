@@ -51,23 +51,12 @@ func LoginHandle(w http.ResponseWriter, r *http.Request) {
 
 func CardHandle(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
-	t, _ := template.ParseFiles("newCard.html")
-	if r.Method != http.MethodPost {
-		t.Execute(w, nil)
-		return
-	}
-	//will add more, just not sure what goes into a card
-	details := Card{
-		Text: r.FormValue("text"),
-	}
-
-	fmt.Println(details)
-
-	t.Execute(w, struct{ Success bool }{true})
+	p := Card{Title: "Some Card Title", Content: "Your stuff is due soon"}
+	t, _ := template.ParseFiles("templates/newcard.html")
+	t.Execute(w, p)
 }
 
-
-func FormHandler(w http.ResponseWriter, r *http.Request){
+func FormHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	t, _ := template.ParseFiles("formTest.html")
 	if r.Method != http.MethodPost {
@@ -76,17 +65,17 @@ func FormHandler(w http.ResponseWriter, r *http.Request){
 	}
 
 	details := BigForm{
-		nickname: r.FormValue("nickname"),
-		email: r.FormValue("email"),
-		password: r.FormValue("password"),
-		gender: r.FormValue("gender"), 
-		securityQ: r.FormValue("securityQuestion"), 
+		nickname:  r.FormValue("nickname"),
+		email:     r.FormValue("email"),
+		password:  r.FormValue("password"),
+		gender:    r.FormValue("gender"),
+		securityQ: r.FormValue("securityQuestion"),
 		languages: r.FormValue("Languages"),
-		textbox: r.FormValue("textbox"),
+		textbox:   r.FormValue("textbox"),
 	}
 
 	fmt.Println(details)
 
 	t.Execute(w, struct{ Success bool }{true})
-	
+
 }
