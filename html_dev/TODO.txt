@@ -1,1 +1,10 @@
-Put your todo list in here if you want... or not, I'm not your boss
+
+
+-Create Profile, Options, and Project skeletons
+-Create card partials
+ -task
+ -comment
+ -post
+ -reminder
+ -others(?)
+-Find out what will be nessesary to script in JS

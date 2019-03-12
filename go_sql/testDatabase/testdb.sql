@@ -34,6 +34,17 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: projects; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.projects (
+    name text
+);
+
+
+ALTER TABLE public.projects OWNER TO postgres;
+
+--
 -- Name: user_login; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -46,6 +57,62 @@ CREATE TABLE public.user_login (
 ALTER TABLE public.user_login OWNER TO postgres;
 
 --
+-- Name: users; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.users (
+    id integer NOT NULL,
+    username text NOT NULL,
+    password text NOT NULL,
+    first_name text,
+    last_name text,
+    email text
+);
+
+
+ALTER TABLE public.users OWNER TO postgres;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.users_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO postgres;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
+
+--
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- Data for Name: projects; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.projects (name) FROM stdin;
+proj
+dev
+bello
+\.
+
+
+--
 -- Data for Name: user_login; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -54,7 +121,47 @@ bob	123
 coolGuy5	pandas
 Alan	Paradise
 sentientRobot	killallhumans
+bob	123
+coolGuy5	pandas
+Alan	Paradise
+sentientRobot	killallhumans
+bob	123
+coolGuy5	pandas
+Alan	Paradise
+sentientRobot	killallhumans
 \.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.users (id, username, password, first_name, last_name, email) FROM stdin;
+1	user1	topSecret	Jane	Smith	jane@example.com
+\.
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.users_id_seq', 1, true);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users users_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_username_key UNIQUE (username);
 
 
 --

@@ -12,7 +12,7 @@ const (
   port     = 5432
   user     = "postgres"
   password = "password"
-  dbname   = "testproject"
+  dbname   = "test_db"
 )
 
 func main() {
@@ -42,7 +42,7 @@ func main() {
 	);` 
   _, err = db.Exec(sqlStatement)
   if err != nil {
-     panic(err)
+	  panic(err)
   }
   sqlStatement2 := `
         INSERT INTO users (username, password, first_name, last_name, email)

@@ -1,0 +1,7 @@
+How to dump and restore a database:
+
+Important! You must do this outside of postgres in the standard terminal.
+
+DUMP: pg_dump -U postgres -h localhost "database" > "filename"
+
+RESTORE: psql -U postgres -d "database" < "filename"
