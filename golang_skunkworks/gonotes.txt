@@ -12,4 +12,4 @@ MIGHT HELP WITH SUBMITTING DATA
 https://stackoverflow.com/questions/41316794/golang-http-multiple-response-writeheader-calls
 
 Sessions
-https://www.sohamkamani.com/blog/2018/03/25/golang-session-authentication/
+https://gowebexamples.com/sessions/
