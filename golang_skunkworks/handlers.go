@@ -14,6 +14,7 @@ import (
 
 var (
 	// key must be 16, 24 or 32 bytes long (AES-128, AES-192 or AES-256)
+	//will eventually make random key generation
 	key = []byte("super-secret-key")
 	store = sessions.NewCookieStore(key)
 )
@@ -56,6 +57,7 @@ func LoginHandle(w http.ResponseWriter, r *http.Request) {
 
 	// Set user as authenticated
 	session.Values["username"] = details.Username
+	session.Values["logedIn"] = true
 	session.Save(r, w)
 
 	// do something with details
