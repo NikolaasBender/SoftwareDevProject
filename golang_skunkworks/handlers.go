@@ -66,9 +66,14 @@ func LoginHandle(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, struct{ Success bool }{true})
 }
 
+var titles = []string{"t1", "t2", "t3", "t4"}
+var contents = []string{"c1", "c2", "c3", "c4"}
+
+
 func CardHandle(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
-	p := Card{Title: "Some Card Title", Content: "Your stuff is due soon"}
+	for
+	p := Card{Title: , Content: "Your stuff is due soon"}
 	t, _ := template.ParseFiles("templates/newcard.html")
 	t.Execute(w, p)
 }
