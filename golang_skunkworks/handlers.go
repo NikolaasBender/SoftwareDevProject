@@ -9,6 +9,13 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
+	"github.com/gorilla/sessions"
+)
+
+var (
+	// key must be 16, 24 or 32 bytes long (AES-128, AES-192 or AES-256)
+	key = []byte("super-secret-key")
+	store = sessions.NewCookieStore(key)
 )
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
@@ -38,13 +45,21 @@ func LoginHandle(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	session, _ := store.Get(r, "cookie-name")
+	// Authentication goes here
+	// ...
+
 	details := ContactDetails{
 		Username: r.FormValue("username"),
 		Password: r.FormValue("password"),
 	}
 
+	// Set user as authenticated
+	session.Values["username"] = details.Username
+	session.Save(r, w)
+
 	// do something with details
-	fmt.Println(details)
+	fmt.Println(session.Values["username"])
 
 	t.Execute(w, struct{ Success bool }{true})
 }

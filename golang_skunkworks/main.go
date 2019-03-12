@@ -13,6 +13,7 @@ import (
 
 //ROUTER CONTSRUCTER
 //VERY IMPORTANT
+
 func newRouter() *mux.Router {
 	r := mux.NewRouter()
 	r.HandleFunc("/", IndexHandle)
