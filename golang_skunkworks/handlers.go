@@ -12,9 +12,13 @@ import (
 	"github.com/gorilla/sessions"
 )
 
+// var (
+// 	template.Must(template.ParseGlob("templates/*"))
+// )
+
 var (
 	// key must be 16, 24 or 32 bytes long (AES-128, AES-192 or AES-256)
-	key = []byte("super-secret-key")
+	key   = []byte("super-secret-key")
 	store = sessions.NewCookieStore(key)
 )
 
@@ -67,11 +71,17 @@ func LoginHandle(w http.ResponseWriter, r *http.Request) {
 var titles = []string{"t1", "t2", "t3", "t4"}
 var contents = []string{"c1", "c2", "c3", "c4"}
 
+//var okCookie =
 
 func CardHandle(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
-	for
-	p := Card{Title: , Content: "Your stuff is due soon"}
+	session, _ := store.Get(r, "cookie_name")
+	p := Card{Title: "", Content: ""}
+	if session.Values["loggedIn"] != true {
+		p = Card{Title: "you're not logged in", Content: "Please login"}
+	} else {
+		p = Card{Title: "you are logged in", Content: "Your stuff is due soon"}
+	}
 	t, _ := template.ParseFiles("templates/newcard.html")
 	t.Execute(w, p)
 }
