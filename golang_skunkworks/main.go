@@ -20,6 +20,7 @@ func newRouter() *mux.Router {
 	r.HandleFunc("/login", LoginHandle)
 	r.HandleFunc("/formHandler", FormHandler)
 	r.HandleFunc("/newCard", CardHandle)
+	r.HandleFunc("/tables", templateStackTest)
 	//FINAL RESORT TO GET SOMETHING
 	r.HandleFunc("/{page}", HomeHandler)
 	//r.HandleFunc("/second", SecondHandler)

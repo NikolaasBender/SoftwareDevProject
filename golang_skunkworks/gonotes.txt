@@ -13,3 +13,6 @@ https://stackoverflow.com/questions/41316794/golang-http-multiple-response-write
 
 Sessions
 https://gowebexamples.com/sessions/
+
+login stuff
+http://www.cihanozhan.com/building-login-and-register-application-with-golang/

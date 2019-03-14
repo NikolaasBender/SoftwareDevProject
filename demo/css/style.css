@@ -1,0 +1,160 @@
+/* HOME OF OUR UNIFIED CSS*/
+
+a {
+  text-decoration: none;
+  color: #FF2D36 !important;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+.container-fluid{
+	padding: 0px;
+	border: 0px;
+}
+
+.btn-signup {
+  background-color: #fff !important;
+  color: #FF2D36 !important;
+  border-radius: 0 !important;
+}
+
+.btn-signup:hover {
+  background-color: #FF2D36 !important;
+  color: #fff !important;
+}
+
+.btn-login {
+  background-color: #FF2D36 !important;
+  border-color: #fff !important;
+  border-width: medium !important;
+  border-radius: 0 !important;
+  color: #fff;
+}
+
+.btn-login:hover {
+  border-width: 0 !important;
+}
+
+#main {
+	font-family: "Raleway";
+	text-align: center;
+	padding: 0px;
+}
+
+#topbar {
+	padding: 30px;
+	background: #FF2D36;
+	color: #fff;
+	border-bottom: 20px solid #fff;
+}
+
+#user-pills {
+  align-items: center;
+	justify-content: center;
+}
+
+#signup {
+  height: 50px;
+  width: 160px;
+  font-size: 1.5em;
+}
+
+#login {
+  height: 50px;
+  width: 160px;
+  font-size: 1.5em;
+}
+
+#paralax-text {
+	font-family: "Raleway";
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 91vh;
+	color: #fff;
+	text-align: left;
+}
+
+#paralax-text h1{
+  padding-top: 135px;
+	font-size: 6.0em;
+	font-weight: 400;
+	line-height: 50px;
+}
+
+#paralax-text h1 span{
+	font-weight: 900;
+	font-style: italic;
+	color: #FF2D36;
+}
+
+#body {
+	min-height: 700px;
+	padding: 50px;
+	background: #fff;
+}
+
+#body h1 {
+	font-size: 7.5em;
+	font-weight: 900;
+	color: #FF2D36;
+}
+
+#body-text {
+	background: #fff;
+	padding: 30px;
+	color: #7f7f7f;
+}
+
+#body-text h2 {
+	font-size: 4.0em;
+	font-weight: 200;
+}
+
+#body-text p {
+	padding-left: 30px;
+	padding-right: 30px;
+	font-size: 2.0em;
+	color: #212121;
+}
+
+#Footer {
+	text-align: center;
+	height:35vh;
+	background: #FF2D36;
+	color: #fff;
+}
+
+#signinsheet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-image: url("../assets/desert_1.jpg");
+  background-size: cover;
+}
+
+#signinsheet .container {
+  align-items: center;
+  justify-content: center;
+}
+
+#signinsheet .container .jumbotron {
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 0;
+  border-left: 10px solid #fff;
+}
+
+#forms button:hover{
+  background-color: #fff !important;
+  color: #FF2D36 !important;
+  border-width: medium !important;
+
+}

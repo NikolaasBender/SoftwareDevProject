@@ -3,23 +3,20 @@ package main
 import (
 	"fmt"
 	"html/template"
-
-	//"log"
 	"net/http"
+	"reflect"
 	"time"
 
 	"github.com/gorilla/mux"
 	"github.com/gorilla/sessions"
 )
 
-// var (
-// 	template.Must(template.ParseGlob("templates/*"))
-// )
+// var templates = template.Must(template.ParseGlob("templates/*"))
 
 var (
 	// key must be 16, 24 or 32 bytes long (AES-128, AES-192 or AES-256)
 	//will eventually make random key generation
-	key = []byte("super-secret-key")
+	key   = []byte("super-secret-key")
 	store = sessions.NewCookieStore(key)
 )
 
@@ -70,9 +67,6 @@ func LoginHandle(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, struct{ Success bool }{true})
 }
 
-var titles = []string{"t1", "t2", "t3", "t4"}
-var contents = []string{"c1", "c2", "c3", "c4"}
-
 //var okCookie =
 
 func CardHandle(w http.ResponseWriter, r *http.Request) {
@@ -110,4 +104,50 @@ func FormHandler(w http.ResponseWriter, r *http.Request) {
 
 	t.Execute(w, struct{ Success bool }{true})
 
+}
+
+var templateFuncs = template.FuncMap{"rangeStruct": RangeStructer}
+
+func templateStackTest(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+
+	cards := []Card{
+		{"t1", "c1"},
+		{"t2", "c2"},
+		{"t3", "c3"},
+		{"t4", "c4"},
+		{"t5", "c5"},
+		{"t6", "c6"},
+	}
+
+	t, err := template.ParseFiles("templates/fillTable.html").Funcs(templateFuncs)
+	// /t, err := t.ParseFiles("templates/fillTable.html")
+	if err != nil {
+		panic(err)
+	}
+	err = t.Execute(w, cards)
+	if err != nil {
+		panic(err)
+	}
+}
+
+// RangeStructer takes the first argument, which must be a struct, and
+// returns the value of each field in a slice. It will return nil
+// if there are no arguments or first argument is not a struct
+func RangeStructer(args ...interface{}) []interface{} {
+	if len(args) == 0 {
+		return nil
+	}
+
+	v := reflect.ValueOf(args[0])
+	if v.Kind() != reflect.Struct {
+		return nil
+	}
+
+	out := make([]interface{}, v.NumField())
+	for i := 0; i < v.NumField(); i++ {
+		out[i] = v.Field(i).Interface()
+	}
+
+	return out
 }
