@@ -47,7 +47,7 @@ func LoginHandle(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	session, _ := store.Get(r, "cookie-name")
+	session, _ := store.Get(r, "login_cookie")
 	// Authentication goes here
 	// ...
 
@@ -58,7 +58,7 @@ func LoginHandle(w http.ResponseWriter, r *http.Request) {
 
 	// Set user as authenticated
 	session.Values["username"] = details.Username
-	session.Values["logedIn"] = true
+	session.Values["loggedIn"] = true
 	session.Save(r, w)
 
 	// do something with details
@@ -67,11 +67,14 @@ func LoginHandle(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, struct{ Success bool }{true})
 }
 
-//var okCookie =
+var titles = []string{"t1", "t2", "t3", "t4"}
+var contents = []string{"c1", "c2", "c3", "c4"}
+
 
 func CardHandle(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
-	session, _ := store.Get(r, "cookie_name")
+	session, _ := store.Get(r, "login_cookie")
+	fmt.Println(session.Values["username"])
 	p := Card{Title: "", Content: ""}
 	if session.Values["loggedIn"] != true {
 		p = Card{Title: "you're not logged in", Content: "Please login"}
