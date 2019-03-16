@@ -1,0 +1,45 @@
+User:
+-List of projects
+-username
+-password
+-profile picture
+-banner picture
+-List of posts
+-List of pins
+
+User Page:
+-User
+-Users assigned tasks (join from project)
+-Users teams (join from user projects)
+
+Project Page:
+-Completed Tasks
+-Backloged tasks
+-In Progress Tasks
+-To Do Tasks
+-Teams List
+-User List
+
+Task:
+-Name
+-Short description
+-Long description
+-Assigned team
+-Assigned users
+-Due Date
+-Completion status
+-User pins
+
+Post:
+-Title
+-Associated User
+-Text content
+-Optional image content
+-List of comments
+-User pins
+
+Comment:
+-Associated User
+-Associated post
+-Text content
+-User pins
