@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"strings"
 	"time"
+	"io/ioutil"
 
 	"github.com/gorilla/mux"
 	"github.com/gorilla/sessions"
@@ -126,11 +127,27 @@ func ViewHandler(w http.ResponseWriter, r *http.Request) {
 		page = pathVariables["page"] + ".html"
 	}
 
-	p := Page{footer: "2019"}
+	//READ CSS FILE
+	//SAVE ALL OF THAT TO A VAIRAIBLE
+	//SAVE IT IN p
+	//MODIFTY HTML A LITTLE BIT
+
+	p := Page{footer: readStyle}
 	err := views.ExecuteTemplate(w, page, p)
 	if err != nil {
 		log.Fatal("Cannot Get View ", err)
 	}
+}
+
+func readStyle string (){
+	b, err := ioutil.ReadFile("assets/style.css") // just pass the file name
+    if err != nil {
+        fmt.Print(err)
+    }
+
+    fmt.Println(b) // print the content as 'bytes'
+
+    str := string(b) // convert content to a 'string'
 }
 
 // func AssetsHandler(w http.ResponseWriter, r *http.Request) {
