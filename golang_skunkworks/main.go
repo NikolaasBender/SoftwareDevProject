@@ -16,15 +16,33 @@ import (
 
 func newRouter() *mux.Router {
 	r := mux.NewRouter()
-	r.HandleFunc("/", IndexHandle)
-	r.HandleFunc("/login", LoginHandle)
-	r.HandleFunc("/formHandler", FormHandler)
-	r.HandleFunc("/newCard", CardHandle)
-	r.HandleFunc("/tables", templateStackTest)
-	//FINAL RESORT TO GET SOMETHING
-	r.HandleFunc("/{page}", HomeHandler)
-	//r.HandleFunc("/second", SecondHandler)
+	// r.HandleFunc("/", IndexHandle)
+	// r.HandleFunc("/login", LoginHandle)
+	// r.HandleFunc("/formHandler", FormHandler)
+	// r.HandleFunc("/newCard", CardHandle)
+	// r.HandleFunc("/storage/{page}", StorageHandler)
+	// //r.HandleFunc("/tables", templateStackTest)
+	// //FINAL RESORT TO GET SOMETHING
+	// r.HandleFunc("/{page}", HomeHandler)
+	// //r.HandleFunc("/assetdebug", assetDebug)
+	// http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
+
 	//r.HandleFunc("/third/{number}", ThirdHandler)
+
+	//VIEWS SUB ROUTER
+	s := r.PathPrefix("/view").Subrouter()
+	s.HandleFunc("/", ViewHandler)
+	s.HandleFunc("/{page}", ViewHandler)
+
+	//ASSETS SUB ROUTER
+	// a := r.PathPrefix("/assets").Subrouter()
+	// a.HandleFunc("/", AssetsHandler)
+	// a.HandleFunc("/{page}", AssetsHandler)
+
+	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
+
+	//CATCH ALL
+	//r.PathPrefix("/").Handler(IndexHandler)
 	return r
 }
 
