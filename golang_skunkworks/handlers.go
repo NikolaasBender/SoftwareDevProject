@@ -150,18 +150,35 @@ func readStyle string (){
     str := string(b) // convert content to a 'string'
 }
 
-// func AssetsHandler(w http.ResponseWriter, r *http.Request) {
-// 	now := time.Now()
-// 	pathVariables := mux.Vars(r)
-// 	fmt.Println("ASSETS HANDLER: '" + pathVariables["page"] + "'" + "'" + r.URL.Path + "'")
-// 	PageVars := PageVariables{ //store the date and time in a struct
-// 		Date: now.Format("02-01-2006"),
-// 		Time: now.Format("15:04:05"),
-// 	}
 
-// 	t, err := template.ParseFiles("assets/" + pathVariables["page"] + ".css")
+func secret(w http.ResponseWriter, r *http.Request) {
+	session, _ := store.Get(r, "cookie-name")
 
-// 	fmt.Println(err.Error())
+	// Check if user is authenticated
+	if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
+		http.Error(w, "Forbidden", http.StatusForbidden)
+		return
+	}
 
-// 	t.Execute(w, PageVars)
-// }
+	// Print secret message
+	fmt.Fprintln(w, "The cake is a lie!")
+}
+
+func login(w http.ResponseWriter, r *http.Request) {
+	session, _ := store.Get(r, "cookie-name")
+
+	// Authentication goes here
+	// ...
+
+	// Set user as authenticated
+	session.Values["authenticated"] = true
+	session.Save(r, w)
+}
+
+func logout(w http.ResponseWriter, r *http.Request) {
+	session, _ := store.Get(r, "cookie-name")
+
+	// Revoke users authentication
+	session.Values["authenticated"] = false
+	session.Save(r, w)
+}
