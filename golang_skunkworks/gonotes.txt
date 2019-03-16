@@ -14,3 +14,9 @@ https://stackoverflow.com/questions/41316794/golang-http-multiple-response-write
 Sessions
 https://gowebexamples.com/sessions/
 http://www.gorillatoolkit.org/pkg/sessions
+
+
+fixing css maybe
+https://stackoverflow.com/questions/36323232/golang-css-files-are-being-sent-with-content-type-text-plain
+
+

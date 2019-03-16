@@ -3,8 +3,9 @@ package main
 import (
 	"fmt"
 	"html/template"
+	"log"
 	"net/http"
-	"reflect"
+	"strings"
 	"time"
 
 	"github.com/gorilla/mux"
@@ -20,6 +21,7 @@ var (
 	store = sessions.NewCookieStore(key)
 )
 
+//THIS HANDLES ANYTHING IN THE TOP DIRECTORY
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	now := time.Now()
 	pathVariables := mux.Vars(r)
@@ -34,11 +36,13 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, PageVars)
 }
 
-func IndexHandle(w http.ResponseWriter, r *http.Request) {
+//SUPER BASIC INDEX HANDLER
+func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
-	http.ServeFile(w, r, r.URL.Path[1:])
+	http.ServeFile(w, r, "/view/index.html")
 }
 
+//THIS SHOULD HANDLE THE LOGIN
 func LoginHandle(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	t, _ := template.ParseFiles("login_test.html")
@@ -70,7 +74,7 @@ func LoginHandle(w http.ResponseWriter, r *http.Request) {
 var titles = []string{"t1", "t2", "t3", "t4"}
 var contents = []string{"c1", "c2", "c3", "c4"}
 
-
+//OUR ATTEMPT FOR DEALING WITH CARDS
 func CardHandle(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	session, _ := store.Get(r, "login_cookie")
@@ -85,6 +89,7 @@ func CardHandle(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, p)
 }
 
+//DEMO FOR DEALING WITH FORMS
 func FormHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	t, _ := template.ParseFiles("formTest.html")
@@ -109,48 +114,37 @@ func FormHandler(w http.ResponseWriter, r *http.Request) {
 
 }
 
-var templateFuncs = template.FuncMap{"rangeStruct": RangeStructer}
+func ViewHandler(w http.ResponseWriter, r *http.Request) {
+	pathVariables := mux.Vars(r)
+	fmt.Println("VIEW HANDLER: '" + pathVariables["page"] + "'" + "'" + r.URL.Path + "'")
 
-func templateStackTest(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusOK)
+	page := ""
 
-	cards := []Card{
-		{"t1", "c1"},
-		{"t2", "c2"},
-		{"t3", "c3"},
-		{"t4", "c4"},
-		{"t5", "c5"},
-		{"t6", "c6"},
+	if strings.Contains(pathVariables["page"], ".html") == true {
+		page = pathVariables["page"]
+	} else {
+		page = pathVariables["page"] + ".html"
 	}
 
-	t, err := template.ParseFiles("templates/fillTable.html").Funcs(templateFuncs)
-	// /t, err := t.ParseFiles("templates/fillTable.html")
+	p := Page{footer: "2019"}
+	err := views.ExecuteTemplate(w, page, p)
 	if err != nil {
-		panic(err)
-	}
-	err = t.Execute(w, cards)
-	if err != nil {
-		panic(err)
+		log.Fatal("Cannot Get View ", err)
 	}
 }
 
-// RangeStructer takes the first argument, which must be a struct, and
-// returns the value of each field in a slice. It will return nil
-// if there are no arguments or first argument is not a struct
-func RangeStructer(args ...interface{}) []interface{} {
-	if len(args) == 0 {
-		return nil
-	}
+// func AssetsHandler(w http.ResponseWriter, r *http.Request) {
+// 	now := time.Now()
+// 	pathVariables := mux.Vars(r)
+// 	fmt.Println("ASSETS HANDLER: '" + pathVariables["page"] + "'" + "'" + r.URL.Path + "'")
+// 	PageVars := PageVariables{ //store the date and time in a struct
+// 		Date: now.Format("02-01-2006"),
+// 		Time: now.Format("15:04:05"),
+// 	}
 
-	v := reflect.ValueOf(args[0])
-	if v.Kind() != reflect.Struct {
-		return nil
-	}
+// 	t, err := template.ParseFiles("assets/" + pathVariables["page"] + ".css")
 
-	out := make([]interface{}, v.NumField())
-	for i := 0; i < v.NumField(); i++ {
-		out[i] = v.Field(i).Interface()
-	}
+// 	fmt.Println(err.Error())
 
-	return out
-}
+// 	t.Execute(w, PageVars)
+// }

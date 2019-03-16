@@ -1,5 +1,7 @@
 package main
 
+import "html/template"
+
 //"fmt"
 //"html/template"
 //"log"
@@ -7,6 +9,8 @@ package main
 //"time"
 
 //"github.com/gorilla/mux"
+
+var views = template.Must(template.ParseGlob("view/*"))
 
 type PageVariables struct {
 	Date string
@@ -33,4 +37,6 @@ type Card struct {
 	Content string
 }
 
-
+type Page struct {
+	footer string
+}
