@@ -3,15 +3,15 @@ package go_dev
 import(
   "database/sql"
   "fmt"
-  "github.com/lib/pq"
+  _ "github.com/lib/pq"
 )
 
-func addUser(username,password,email,name,bio) (bool) {
+func addUser(username,password,email,name) (bool) {
 
   sqlStatement := `INSERT INTO user_login (username, password, email)
   VALUES ($1, $2, $3);`
-  sqlStatement := `INSERT INTO user_info (username, name, bio)
-  VALUES ($1, $2, $3);`
+  sqlStatement := `INSERT INTO user_info (username, name)
+  VALUES ($1, $4);`
 
   err = db.QueryRow(sqlStatement,username,password,email)
 
@@ -28,4 +28,10 @@ func addUser(username,password,email,name,bio) (bool) {
   return true
 }
 
-func getUser(uername)
+func exists(uername)
+
+func validate(username, password)
+
+func getUserInfo(username)
+
+func editUserInfo()
