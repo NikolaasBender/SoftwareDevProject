@@ -9,7 +9,6 @@ import (
 	//"time"
 
 	"github.com/gorilla/mux"
-	"github.com/gorilla/sessions"
 )
 
 //ROUTER CONTSRUCTER
@@ -40,6 +39,11 @@ func newRouter() *mux.Router {
 	// a.HandleFunc("/", AssetsHandler)
 	// a.HandleFunc("/{page}", AssetsHandler)
 
+	//SESSIONS AND STUFF
+	r.HandleFunc("/secret", secret)
+	r.HandleFunc("/login", login)
+	r.HandleFunc("/logout", logout)
+
 	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
 
 	//CATCH ALL
@@ -54,4 +58,3 @@ func main() {
 	//RUNS THE SERVER
 	log.Fatal(http.ListenAndServe(":5050", r))
 }
-

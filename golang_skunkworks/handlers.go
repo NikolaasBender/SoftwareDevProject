@@ -3,11 +3,11 @@ package main
 import (
 	"fmt"
 	"html/template"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"strings"
 	"time"
-	"io/ioutil"
 
 	"github.com/gorilla/mux"
 	"github.com/gorilla/sessions"
@@ -90,30 +90,30 @@ func CardHandle(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, p)
 }
 
-//DEMO FOR DEALING WITH FORMS
-func FormHandler(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusOK)
-	t, _ := template.ParseFiles("formTest.html")
-	if r.Method != http.MethodPost {
-		t.Execute(w, nil)
-		return
-	}
+// //DEMO FOR DEALING WITH FORMS
+// func FormHandler(w http.ResponseWriter, r *http.Request) {
+// 	w.WriteHeader(http.StatusOK)
+// 	t, _ := template.ParseFiles("formTest.html")
+// 	if r.Method != http.MethodPost {
+// 		t.Execute(w, nil)
+// 		return
+// 	}
 
-	details := BigForm{
-		nickname:  r.FormValue("nickname"),
-		email:     r.FormValue("email"),
-		password:  r.FormValue("password"),
-		gender:    r.FormValue("gender"),
-		securityQ: r.FormValue("securityQuestion"),
-		languages: r.FormValue("Languages"),
-		textbox:   r.FormValue("textbox"),
-	}
+// 	details := BigForm{
+// 		nickname:  r.FormValue("nickname"),
+// 		email:     r.FormValue("email"),
+// 		password:  r.FormValue("password"),
+// 		gender:    r.FormValue("gender"),
+// 		securityQ: r.FormValue("securityQuestion"),
+// 		languages: r.FormValue("Languages"),
+// 		textbox:   r.FormValue("textbox"),
+// 	}
 
-	fmt.Println(details)
+// 	fmt.Println(details)
 
-	t.Execute(w, struct{ Success bool }{true})
+// 	t.Execute(w, struct{ Success bool }{true})
 
-}
+// }
 
 func ViewHandler(w http.ResponseWriter, r *http.Request) {
 	pathVariables := mux.Vars(r)
@@ -132,24 +132,22 @@ func ViewHandler(w http.ResponseWriter, r *http.Request) {
 	//SAVE IT IN p
 	//MODIFTY HTML A LITTLE BIT
 
-	p := Page{footer: readStyle}
+	p := Page{footer: readStyle()}
 	err := views.ExecuteTemplate(w, page, p)
 	if err != nil {
 		log.Fatal("Cannot Get View ", err)
 	}
 }
 
-func readStyle string (){
+func readStyle() string {
 	b, err := ioutil.ReadFile("assets/style.css") // just pass the file name
-    if err != nil {
-        fmt.Print(err)
-    }
+	if err != nil {
+		fmt.Print(err)
+	}
 
-    fmt.Println(b) // print the content as 'bytes'
-
-    str := string(b) // convert content to a 'string'
+	str := string(b) // convert content to a 'string'
+	return str
 }
-
 
 func secret(w http.ResponseWriter, r *http.Request) {
 	session, _ := store.Get(r, "cookie-name")
@@ -165,14 +163,36 @@ func secret(w http.ResponseWriter, r *http.Request) {
 }
 
 func login(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+	t, _ := template.ParseFiles("login_test.html")
+	if r.Method != http.MethodPost {
+		t.Execute(w, nil)
+		return
+	}
+
 	session, _ := store.Get(r, "cookie-name")
 
+	//GET LOGIN INFO
+	details := ContactDetails{
+		Username: r.FormValue("username"),
+		Password: r.FormValue("password"),
+	}
+
 	// Authentication goes here
-	// ...
+	// if(password and username) exists in db == true{
+	//	session.Values["authenticated"] = true
+	// }else{
+	// session.Values["authenticated"] = false
+	// }
 
 	// Set user as authenticated
 	session.Values["authenticated"] = true
 	session.Save(r, w)
+
+	fmt.Println(session.Values["authenticated"])
+	fmt.Println(details)
+
+	t.Execute(w, struct{ Success bool }{true})
 }
 
 func logout(w http.ResponseWriter, r *http.Request) {
