@@ -22,8 +22,15 @@ var (
 	store = sessions.NewCookieStore(key)
 )
 
+var debug = true
+
 //THIS HANDLES ANYTHING IN THE TOP DIRECTORY
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
+
+	if debug == true {
+		fmt.Println("Hit HomeHandler")
+	}
+
 	now := time.Now()
 	pathVariables := mux.Vars(r)
 	fmt.Println("HOME HANDLER: '" + pathVariables["page"] + "'" + "'" + r.URL.Path + "'")
@@ -39,12 +46,23 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 
 //SUPER BASIC INDEX HANDLER
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
+
+	if debug == true {
+		fmt.Println("Hit IndexHandler")
+	}
+
 	w.WriteHeader(http.StatusOK)
-	http.ServeFile(w, r, "/view/index.html")
+	t, _ := template.ParseFiles("/view/index.html")
+	t.Execute(w, t)
 }
 
 //THIS SHOULD HANDLE THE LOGIN
-func LoginHandle(w http.ResponseWriter, r *http.Request) {
+func LoginHandler(w http.ResponseWriter, r *http.Request) {
+
+	if debug == true {
+		fmt.Println("Hit LoginHandler")
+	}
+
 	w.WriteHeader(http.StatusOK)
 	t, _ := template.ParseFiles("login_test.html")
 	if r.Method != http.MethodPost {
@@ -76,7 +94,12 @@ var titles = []string{"t1", "t2", "t3", "t4"}
 var contents = []string{"c1", "c2", "c3", "c4"}
 
 //OUR ATTEMPT FOR DEALING WITH CARDS
-func CardHandle(w http.ResponseWriter, r *http.Request) {
+func CardHandler(w http.ResponseWriter, r *http.Request) {
+
+	if debug == true {
+		fmt.Println("Hit CardHandler")
+	}
+
 	w.WriteHeader(http.StatusOK)
 	session, _ := store.Get(r, "login_cookie")
 	fmt.Println(session.Values["username"])
@@ -116,6 +139,11 @@ func CardHandle(w http.ResponseWriter, r *http.Request) {
 // }
 
 func ViewHandler(w http.ResponseWriter, r *http.Request) {
+
+	if debug == true {
+		fmt.Println("Hit ViewHandler")
+	}
+
 	pathVariables := mux.Vars(r)
 	fmt.Println("VIEW HANDLER: '" + pathVariables["page"] + "'" + "'" + r.URL.Path + "'")
 
@@ -150,6 +178,11 @@ func readStyle() string {
 }
 
 func secret(w http.ResponseWriter, r *http.Request) {
+
+	if debug == true {
+		fmt.Println("Hit secret")
+	}
+
 	session, _ := store.Get(r, "cookie-name")
 
 	// Check if user is authenticated
@@ -163,6 +196,11 @@ func secret(w http.ResponseWriter, r *http.Request) {
 }
 
 func login(w http.ResponseWriter, r *http.Request) {
+
+	if debug == true {
+		fmt.Println("Hit login")
+	}
+
 	w.WriteHeader(http.StatusOK)
 	t, _ := template.ParseFiles("login_test.html")
 	if r.Method != http.MethodPost {
@@ -187,15 +225,22 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 	// Set user as authenticated
 	session.Values["authenticated"] = true
+	session.Values["name"] = r.FormValue("username")
 	session.Save(r, w)
 
 	fmt.Println(session.Values["authenticated"])
 	fmt.Println(details)
 
-	t.Execute(w, struct{ Success bool }{true})
+	http.Redirect(w, r, "http://www.golang.org", 302)
+
 }
 
 func logout(w http.ResponseWriter, r *http.Request) {
+
+	if debug == true {
+		fmt.Println("Hit logout")
+	}
+
 	session, _ := store.Get(r, "cookie-name")
 
 	// Revoke users authentication

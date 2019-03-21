@@ -15,6 +15,7 @@ Sessions
 https://gowebexamples.com/sessions/
 http://www.gorillatoolkit.org/pkg/sessions
 https://www.sohamkamani.com/blog/2018/02/25/golang-password-authentication-and-storage/
+https://gist.github.com/danesparza/eb3a63ab55a7cd33923e 
 
 Note: Don't store your key in your source code. Pass it via an
 environmental variable, or flag (or both), and don't accidentally commit it

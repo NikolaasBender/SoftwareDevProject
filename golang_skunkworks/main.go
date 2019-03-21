@@ -3,6 +3,7 @@ package main
 import (
 	//"fmt"
 	//"html/template"
+	"fmt"
 	"log"
 	"net/http"
 
@@ -16,6 +17,7 @@ import (
 
 func newRouter() *mux.Router {
 	r := mux.NewRouter()
+	r.Handle("/assets/", http.StripPrefix("/assets", http.FileServer(http.Dir("/assets"))))
 	// r.HandleFunc("/", IndexHandle)
 	// r.HandleFunc("/login", LoginHandle)
 	// r.HandleFunc("/formHandler", FormHandler)
@@ -47,7 +49,12 @@ func newRouter() *mux.Router {
 	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
 
 	//CATCH ALL
-	//r.PathPrefix("/").Handler(IndexHandler)
+	r.HandleFunc("/", IndexHandler)
+
+	if debug == true {
+		fmt.Println("")
+	}
+
 	return r
 }
 
@@ -55,6 +62,10 @@ func main() {
 
 	//WE NEED A ROUTER
 	r := newRouter()
+
+	port := ":5050"
+
+	fmt.Println("go to ->  http://localhost" + port)
 	//RUNS THE SERVER
-	log.Fatal(http.ListenAndServe(":5050", r))
+	log.Fatal(http.ListenAndServe(port, r))
 }
