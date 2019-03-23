@@ -200,7 +200,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 	if debug == true {
 		fmt.Println("Hit login")
 	}
-
+	
 	w.WriteHeader(http.StatusOK)
 	t, _ := template.ParseFiles("login_test.html")
 	if r.Method != http.MethodPost {
