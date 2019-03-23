@@ -33,3 +33,6 @@ fixing css maybe
 https://stackoverflow.com/questions/36323232/golang-css-files-are-being-sent-with-content-type-text-plain
 
 
+DONT SET ANY WRITE HEADERS!!!
+w.WriteHeader(http.StatusOK)
+THIS IS THE MARK OF THE BEAST!!!

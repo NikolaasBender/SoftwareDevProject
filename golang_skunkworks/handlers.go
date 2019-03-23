@@ -199,9 +199,10 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 	if debug == true {
 		fmt.Println("Hit login")
+		fmt.Println(r.Method)
 	}
+
 	
-	w.WriteHeader(http.StatusOK)
 	t, _ := template.ParseFiles("login_test.html")
 	if r.Method != http.MethodPost {
 		t.Execute(w, nil)
@@ -231,7 +232,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(session.Values["authenticated"])
 	fmt.Println(details)
 
-	http.Redirect(w, r, "http://www.golang.org", 302)
+	http.Redirect(w, r, "https://www.youtube.com/", http.StatusFound)
 
 }
 
