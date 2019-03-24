@@ -207,7 +207,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(r.Method)
 	}
 
-	t, _ := template.ParseFiles("login_test.html")
+	t, _ := template.ParseFiles("auth/login.html")
 	if r.Method != http.MethodPost {
 		t.Execute(w, nil)
 		return
@@ -217,7 +217,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 	//GET LOGIN INFO
 	details := ContactDetails{
-		Username: r.FormValue("username"),
+		Username: r.FormValue("email"),
 		Password: r.FormValue("password"),
 	}
 
