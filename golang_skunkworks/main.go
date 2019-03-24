@@ -20,9 +20,9 @@ func newRouter() *mux.Router {
 	// r.Handle("/assets/", http.StripPrefix("/assets", http.FileServer(http.Dir("/assets"))))
 
 	//VIEWS SUB ROUTER
-	// s := r.PathPrefix("/view").Subrouter()
-	// s.HandleFunc("/", ViewHandler)
-	// s.HandleFunc("/{page}", ViewHandler)
+	s := r.PathPrefix("/view").Subrouter()
+	s.HandleFunc("/", ViewHandler)
+	s.HandleFunc("/{page}", ViewHandler)
 
 	//SESSIONS AND STUFF
 	r.HandleFunc("/secret", secret)

@@ -100,7 +100,6 @@ func CardHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Hit CardHandler")
 	}
 
-	w.WriteHeader(http.StatusOK)
 	session, _ := store.Get(r, "login_cookie")
 	fmt.Println(session.Values["username"])
 	p := Card{Title: "", Content: ""}
@@ -142,6 +141,12 @@ func ViewHandler(w http.ResponseWriter, r *http.Request) {
 
 	if debug == true {
 		fmt.Println("Hit ViewHandler")
+	}
+	session, _ := store.Get(r, "cookie-name")
+
+	if session.Values["authenticated"] != true {
+		http.Redirect(w, r, "/login", http.StatusFound)
+		return
 	}
 
 	pathVariables := mux.Vars(r)
@@ -202,7 +207,6 @@ func login(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(r.Method)
 	}
 
-	
 	t, _ := template.ParseFiles("login_test.html")
 	if r.Method != http.MethodPost {
 		t.Execute(w, nil)
@@ -220,8 +224,10 @@ func login(w http.ResponseWriter, r *http.Request) {
 	// Authentication goes here
 	// if(password and username) exists in db == true{
 	//	session.Values["authenticated"] = true
+	//	http.Redirect(w, r, "/view/index.html", http.StatusFound)
 	// }else{
-	// session.Values["authenticated"] = false
+	// 	session.Values["authenticated"] = false
+	//	t.Execute(w, nil)
 	// }
 
 	// Set user as authenticated
@@ -232,7 +238,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(session.Values["authenticated"])
 	fmt.Println(details)
 
-	http.Redirect(w, r, "https://www.youtube.com/", http.StatusFound)
+	http.Redirect(w, r, "/view/index.html", http.StatusFound)
 
 }
 
