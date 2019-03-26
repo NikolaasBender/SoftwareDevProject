@@ -3,9 +3,13 @@ We should be able to approach the website as a
 brand new user and sign up, login, and get to 
 the userpage.
 
+
+0) Index page when you hit the site
+    a) it should hit this before anything else
+    b) it shouldn't break stuff
 1) Full login page should work
-        a) verify against db
-        b) display correct info for the user, right posts for the right user
+    a) verify against db
+    b) display correct info for the user, right posts for the right user
 2) Full sign up page should work
-        a) email varification?
-        b) save to db
+    a) email varification?
+    b) save to db

@@ -165,15 +165,15 @@ func ViewHandler(w http.ResponseWriter, r *http.Request) {
 	//SAVE IT IN p
 	//MODIFTY HTML A LITTLE BIT
 
-	p := Page{style: readStyle()}
-	err := views.ExecuteTemplate(w, page, p)
+	// p := Page{style: readStyle()}
+	err := views.Execute(w, page)
 	if err != nil {
 		log.Fatal("Cannot Get View ", err)
 	}
 }
 
 func readStyle() string {
-	b, err := ioutil.ReadFile("assets/style.css") // just pass the file name
+	b, err := ioutil.ReadFile("static/style.css") // just pass the file name
 	if err != nil {
 		fmt.Print(err)
 	}
@@ -238,7 +238,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(session.Values["authenticated"])
 	fmt.Println(details)
 
-	http.Redirect(w, r, "/view/index.html", http.StatusFound)
+	http.Redirect(w, r, "/view/userpage.html", http.StatusFound)
 
 }
 
@@ -253,6 +253,8 @@ func logout(w http.ResponseWriter, r *http.Request) {
 	// Revoke users authentication
 	session.Values["authenticated"] = false
 	session.Save(r, w)
+
+	http.Redirect(w, r, "/view/index.html", http.StatusFound)
 }
 
 func notFound(w http.ResponseWriter, r *http.Request) {

@@ -11,7 +11,7 @@ import "html/template"
 //"github.com/gorilla/mux"
 
 var views = template.Must(template.ParseGlob("view/*"))
-var style = template.Must(template.ParseGlob(""))
+var style = template.Must(template.ParseGlob("static/*"))
 
 type PageVariables struct {
 	Date string
