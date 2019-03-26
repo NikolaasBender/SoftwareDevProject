@@ -17,7 +17,8 @@ import (
 
 func newRouter() *mux.Router {
 	r := mux.NewRouter()
-	// r.Handle("/assets/", http.StripPrefix("/assets", http.FileServer(http.Dir("/assets"))))
+	r.NotFoundHandler = http.HandlerFunc(notFound)
+	//r.Handle("/assets/", http.StripPrefix("/assets", http.FileServer(http.Dir("/assets"))))
 
 	//VIEWS SUB ROUTER
 	s := r.PathPrefix("/view").Subrouter()
@@ -29,7 +30,7 @@ func newRouter() *mux.Router {
 	r.HandleFunc("/login", login)
 	r.HandleFunc("/logout", logout)
 
-	// http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
+	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
 
 	//CATCH ALL
 	//r.HandleFunc("/", IndexHandler)

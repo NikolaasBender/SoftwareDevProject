@@ -165,7 +165,7 @@ func ViewHandler(w http.ResponseWriter, r *http.Request) {
 	//SAVE IT IN p
 	//MODIFTY HTML A LITTLE BIT
 
-	p := Page{footer: readStyle()}
+	p := Page{style: readStyle()}
 	err := views.ExecuteTemplate(w, page, p)
 	if err != nil {
 		log.Fatal("Cannot Get View ", err)
@@ -218,7 +218,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 	//GET LOGIN INFO
 	details := ContactDetails{
 		Username: r.FormValue("email"),
-		Password: r.FormValue("password"),
+		Password: r.FormValue("pwd"),
 	}
 
 	// Authentication goes here
@@ -253,4 +253,10 @@ func logout(w http.ResponseWriter, r *http.Request) {
 	// Revoke users authentication
 	session.Values["authenticated"] = false
 	session.Save(r, w)
+}
+
+func notFound(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("404.html")
+
+	t.Execute(w, nil)
 }

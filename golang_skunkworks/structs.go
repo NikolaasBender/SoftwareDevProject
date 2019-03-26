@@ -11,6 +11,7 @@ import "html/template"
 //"github.com/gorilla/mux"
 
 var views = template.Must(template.ParseGlob("view/*"))
+var style = template.Must(template.ParseGlob(""))
 
 type PageVariables struct {
 	Date string
@@ -38,5 +39,5 @@ type Card struct {
 }
 
 type Page struct {
-	footer string
+	style string
 }
