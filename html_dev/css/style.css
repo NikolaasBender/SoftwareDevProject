@@ -162,33 +162,73 @@ a {
 /*~~~~~~~~~~~~ USERPAGE CSS STARTS HERE ~~~~~~~~~~~~*/
 
 #header-container {
-  background-color: red;
-  height: 15vh;
+  background-color: #fff;
+  height: 30vh;
   z-index: 0;
+  border-bottom: 25px solid #FF2D36;
 }
 
 #sidebar-container {
-  background-color: #000;
-  width: 25vw;
+  background-color: #FF2D36;
+  width: 35vw;
   height: 80vh;
   z-index: 1;
 }
 
 #profile-img {
   position: relative;
-  top: -100px;
-  background-color: blue;
-  height: 200px;
-  width: 200px;
-
+  top: -15vh;
+  background-color: #fff;
+  height: 300px;
+  width: 300px;
+  border: 10px solid #FF2D36;
 }
 
 #sidebar-contents {
-  background-color: green;
-  height: 10vh;
+  position: relative;
+  top: -15vh;
+  height: 100vh;
+  width: 90%;
+  color: #fff;
+  font-family: "Raleway";
+}
+
+#sidebar-contents h1 {
+  font-size: 3.5em;
+  font-weight: 900;
+  padding-top: 20px;
+}
+
+#sidebar-contents h3 {
+  font-style: italic;
+  font-weight: lighter;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#sidebar-contents p {
+
 }
 
 #body-container {
- background-color: yellow;
+ background-color: #fff;
  height: 1000px;
+ align-items: center;
+ margin-top: 5vh;
+}
+
+#sample-item-1 {
+  height: 45vh;
+  width: 100%;
+  background-color: #FF2D36;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+#sample-item-2 {
+  height: 75vh;
+  width: 100%;
+  background-color: #FF2D36;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
