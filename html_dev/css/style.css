@@ -158,3 +158,37 @@ a {
   border-width: medium !important;
 
 }
+
+/*~~~~~~~~~~~~ USERPAGE CSS STARTS HERE ~~~~~~~~~~~~*/
+
+#header-container {
+  background-color: red;
+  height: 15vh;
+  z-index: 0;
+}
+
+#sidebar-container {
+  background-color: #000;
+  width: 25vw;
+  height: 80vh;
+  z-index: 1;
+}
+
+#profile-img {
+  position: relative;
+  top: -100px;
+  background-color: blue;
+  height: 200px;
+  width: 200px;
+
+}
+
+#sidebar-contents {
+  background-color: green;
+  height: 10vh;
+}
+
+#body-container {
+ background-color: yellow;
+ height: 1000px;
+}
