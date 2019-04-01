@@ -47,9 +47,10 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Hit IndexHandler")
 	}
 
-	w.WriteHeader(http.StatusOK)
-	t, _ := template.ParseFiles("/view/index.html")
-	t.Execute(w, t)
+	err := views.Execute(w, "/view/index.html")
+	if err != nil {
+		log.Fatal("Cannot Get View ", err)
+	}
 }
 
 //just demo crap
@@ -245,38 +246,4 @@ func notFound(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles("404.html")
 
 	t.Execute(w, nil)
-}
-
-//=====================================================================================
-//THIS MIGHT BE ABLE TO FIX THE STYLE SHEET ISSUES
-//YOU NEED TO SEE IF YOU CAN FIX THE FILE TYPE SO
-//THAT IT DOESN'T HAVE THE 'MIME' TYPE ISSUE
-//OF IT BEING 'text/plain' IT NEEDS TO BE 'text/css'
-//SEE IF YOU CAN JUST STET IT IN HERE
-//=====================================================================================
-func StaticHandler(w http.ResponseWriter, r *http.Request) {
-
-	if debug == true {
-		fmt.Println("OH YEET! You hit the static handler")
-	}
-
-	pathVariables := mux.Vars(r)
-	if debug == true {
-		fmt.Println("STATIC HANDLER: '" + pathVariables["page"] + "'" + "'" + r.URL.Path + "'")
-	}
-
-	page := ""
-
-	if strings.Contains(pathVariables["page"], ".css") == true {
-		page = pathVariables["page"]
-	} else {
-		page = pathVariables["page"] + ".css"
-	}
-
-	//SET PAGE TYPE
-	//SERVE THE PAGE
-	//REPEAT UNTIL THUROUGHLY FRUSTURATED
-
-	// http.ServeFile(page)
-	fmt.Println(page)
 }

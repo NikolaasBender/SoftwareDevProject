@@ -17,11 +17,12 @@ import (
 
 func newRouter() *mux.Router {
 	r := mux.NewRouter()
-	r.Handle("/assets/", http.StripPrefix("/assets", http.FileServer(http.Dir("/assets"))))
-	//r.Handle("/static/", http.StripPrefix("/static", http.FileServer(http.Dir("/static"))))
+
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	//THIS IS 100% VOODOO - DONT FUCKING TOUCH THIS UNDER ANY CIRCUMSTANCES
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static/"))))
 	
-	a := r.PathPrefix("/static").Subrouter()
-	a.HandleFunc("/{page}", StaticHandler)
 
 	//VIEWS SUB ROUTER
 	s := r.PathPrefix("/view").Subrouter()
@@ -33,7 +34,6 @@ func newRouter() *mux.Router {
 	r.HandleFunc("/login", login)
 	r.HandleFunc("/logout", logout)
 
-	
 	//DEFAULT ROUTE WHEN SOMEONE HITS THE SITE
 	r.HandleFunc("/", IndexHandler)
 
