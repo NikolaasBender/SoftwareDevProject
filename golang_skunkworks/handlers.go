@@ -7,7 +7,6 @@ import (
 	"log"
 	"net/http"
 	"strings"
-	"time"
 
 	"github.com/gorilla/mux"
 	"github.com/gorilla/sessions"
@@ -31,20 +30,17 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Hit HomeHandler")
 	}
 
-	now := time.Now()
 	pathVariables := mux.Vars(r)
 	fmt.Println("HOME HANDLER: '" + pathVariables["page"] + "'" + "'" + r.URL.Path + "'")
-	PageVars := PageVariables{ //store the date and time in a struct
-		Date: now.Format("02-01-2006"),
-		Time: now.Format("15:04:05"),
-	}
 
 	t, _ := template.ParseFiles(pathVariables["page"])
 
-	t.Execute(w, PageVars)
+	t.Execute(w, t)
 }
 
+//=====================================================================================
 //SUPER BASIC INDEX HANDLER
+//=====================================================================================
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
 
 	if debug == true {
@@ -56,44 +52,13 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, t)
 }
 
-//THIS SHOULD HANDLE THE LOGIN
-func LoginHandler(w http.ResponseWriter, r *http.Request) {
-
-	if debug == true {
-		fmt.Println("Hit LoginHandler")
-	}
-
-	w.WriteHeader(http.StatusOK)
-	t, _ := template.ParseFiles("login_test.html")
-	if r.Method != http.MethodPost {
-		t.Execute(w, nil)
-		return
-	}
-
-	session, _ := store.Get(r, "login_cookie")
-	// Authentication goes here
-	// ...
-
-	details := ContactDetails{
-		Username: r.FormValue("username"),
-		Password: r.FormValue("password"),
-	}
-
-	// Set user as authenticated
-	session.Values["username"] = details.Username
-	session.Values["loggedIn"] = true
-	session.Save(r, w)
-
-	// do something with details
-	fmt.Println(session.Values["username"])
-
-	t.Execute(w, struct{ Success bool }{true})
-}
-
+//just demo crap
 var titles = []string{"t1", "t2", "t3", "t4"}
 var contents = []string{"c1", "c2", "c3", "c4"}
 
+//=====================================================================================
 //OUR ATTEMPT FOR DEALING WITH CARDS
+//=====================================================================================
 func CardHandler(w http.ResponseWriter, r *http.Request) {
 
 	if debug == true {
@@ -112,31 +77,36 @@ func CardHandler(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, p)
 }
 
-// //DEMO FOR DEALING WITH FORMS
-// func FormHandler(w http.ResponseWriter, r *http.Request) {
-// 	w.WriteHeader(http.StatusOK)
-// 	t, _ := template.ParseFiles("formTest.html")
-// 	if r.Method != http.MethodPost {
-// 		t.Execute(w, nil)
-// 		return
-// 	}
+//=====================================================================================
+//DEMO FOR DEALING WITH FORMS
+//=====================================================================================
+func FormHandler(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+	t, _ := template.ParseFiles("formTest.html")
+	if r.Method != http.MethodPost {
+		t.Execute(w, nil)
+		return
+	}
 
-// 	details := BigForm{
-// 		nickname:  r.FormValue("nickname"),
-// 		email:     r.FormValue("email"),
-// 		password:  r.FormValue("password"),
-// 		gender:    r.FormValue("gender"),
-// 		securityQ: r.FormValue("securityQuestion"),
-// 		languages: r.FormValue("Languages"),
-// 		textbox:   r.FormValue("textbox"),
-// 	}
+	details := BigForm{
+		nickname:  r.FormValue("nickname"),
+		email:     r.FormValue("email"),
+		password:  r.FormValue("password"),
+		gender:    r.FormValue("gender"),
+		securityQ: r.FormValue("securityQuestion"),
+		languages: r.FormValue("Languages"),
+		textbox:   r.FormValue("textbox"),
+	}
 
-// 	fmt.Println(details)
+	fmt.Println(details)
 
-// 	t.Execute(w, struct{ Success bool }{true})
+	t.Execute(w, struct{ Success bool }{true})
 
-// }
+}
 
+//=====================================================================================
+//VIEW HANDLER
+//=====================================================================================
 func ViewHandler(w http.ResponseWriter, r *http.Request) {
 
 	if debug == true {
@@ -165,15 +135,17 @@ func ViewHandler(w http.ResponseWriter, r *http.Request) {
 	//SAVE IT IN p
 	//MODIFTY HTML A LITTLE BIT
 
-	// p := Page{style: readStyle()}
 	err := views.Execute(w, page)
 	if err != nil {
 		log.Fatal("Cannot Get View ", err)
 	}
 }
 
+//=====================================================================================
+//THIS CAN PROBBALY READ IN THE STYLE SHEET BUT NOTHING WANTS TO WORK
+//=====================================================================================
 func readStyle() string {
-	b, err := ioutil.ReadFile("static/style.css") // just pass the file name
+	b, err := ioutil.ReadFile("static/style.html") // just pass the file name
 	if err != nil {
 		fmt.Print(err)
 	}
@@ -182,6 +154,9 @@ func readStyle() string {
 	return str
 }
 
+//=====================================================================================
+//PFFFT I HAVE NO IDEA WHAT THIS IS FOR
+//=====================================================================================
 func secret(w http.ResponseWriter, r *http.Request) {
 
 	if debug == true {
@@ -200,6 +175,9 @@ func secret(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "The cake is a lie!")
 }
 
+//=====================================================================================
+//THIS IS THE LOGIN HANDLER
+//=====================================================================================
 func login(w http.ResponseWriter, r *http.Request) {
 
 	if debug == true {
@@ -242,6 +220,9 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 }
 
+//=====================================================================================
+//THE LOG OUT HANDLER
+//=====================================================================================
 func logout(w http.ResponseWriter, r *http.Request) {
 
 	if debug == true {
@@ -257,8 +238,45 @@ func logout(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/view/index.html", http.StatusFound)
 }
 
+//=====================================================================================
+//THIS DISPLAYS THE CUSTOM 404 PAGE
+//=====================================================================================
 func notFound(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles("404.html")
 
 	t.Execute(w, nil)
+}
+
+//=====================================================================================
+//THIS MIGHT BE ABLE TO FIX THE STYLE SHEET ISSUES
+//YOU NEED TO SEE IF YOU CAN FIX THE FILE TYPE SO
+//THAT IT DOESN'T HAVE THE 'MIME' TYPE ISSUE
+//OF IT BEING 'text/plain' IT NEEDS TO BE 'text/css'
+//SEE IF YOU CAN JUST STET IT IN HERE
+//=====================================================================================
+func StaticHandler(w http.ResponseWriter, r *http.Request) {
+
+	if debug == true {
+		fmt.Println("OH YEET! You hit the static handler")
+	}
+
+	pathVariables := mux.Vars(r)
+	if debug == true {
+		fmt.Println("STATIC HANDLER: '" + pathVariables["page"] + "'" + "'" + r.URL.Path + "'")
+	}
+
+	page := ""
+
+	if strings.Contains(pathVariables["page"], ".css") == true {
+		page = pathVariables["page"]
+	} else {
+		page = pathVariables["page"] + ".css"
+	}
+
+	//SET PAGE TYPE
+	//SERVE THE PAGE
+	//REPEAT UNTIL THUROUGHLY FRUSTURATED
+
+	// http.ServeFile(page)
+	fmt.Println(page)
 }
