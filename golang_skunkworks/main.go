@@ -22,8 +22,10 @@ func newRouter() *mux.Router {
 	//THIS IS 100% VOODOO - DONT FUCKING TOUCH THIS UNDER ANY CIRCUMSTANCES
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static/"))))
-	
+	r.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", http.FileServer(http.Dir("assets/"))))
 
+
+	//ALL THE REST OF THESE ARE FINE TO MESS WITH
 	//VIEWS SUB ROUTER
 	s := r.PathPrefix("/view").Subrouter()
 	s.HandleFunc("/", ViewHandler)
