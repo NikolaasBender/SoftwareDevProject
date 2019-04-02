@@ -6,7 +6,7 @@ import(
   _ "github.com/lib/pq"
 )
 
-func addUser(username,password,email,name) (bool) {
+func addUser(username,password,email,name,db) (bool) {
 
   sqlStatement := `INSERT INTO user_login (username, password, email)
   VALUES ($1, $2, $3);`
@@ -28,10 +28,51 @@ func addUser(username,password,email,name) (bool) {
   return true
 }
 
-func exists(uername)
+func exists(uername,db) (bool) {
 
-func validate(username, password)
+    sqlStatement := `SELECT username FROM user_login
+    WHERE username = $1;`
 
-func getUserInfo(username)
+    var uname string
+
+    err = db.QueryRow(sqlStatement,username).Scan(&uname)
+
+    if(err == sql.ErrNoRows) {
+      return false
+    }
+    else if (err != nil) {
+      return false
+    }
+
+    return true
+}
+
+func validate(username, password, db) (bool) {
+
+  sqlStatement := `SELECT username FROM user_login
+  WHERE username = $1 AND password = $2;`
+
+  var uname string
+
+  err = db.QueryRow(sqlStatement,username, password).Scan(&uname)
+
+  if(err == sql.ErrNoRows) {
+    return false
+  }
+  else if (err != nil) {
+    return false
+  }
+
+  return true
+}
+
+func getUserInfo(username, db) (bool) {
+
+  sqlStatement := `SELECT * FROM user_info
+  WHERE username = $1;`
+
+  var 
+
+}
 
 func editUserInfo()
