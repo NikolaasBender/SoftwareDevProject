@@ -3,26 +3,29 @@ package go_dev
 import(
   "database/sql"
   _ "github.com/lib/pq"
+  "fmt"
 )
 
-func AddUser(username,password,email,name string, db *sql.DB) (bool) {
+func AddUser(username string,password int,email,name string, db *sql.DB) (bool) {
 
   sqlStatement := `INSERT INTO user_login (username, password, email)
   VALUES ($1, $2, $3);`
   sqlStatement2 := `INSERT INTO user_info (username, name)
-  VALUES ($1, $4);`
+  VALUES ($1, $2);`
 
   var err error
 
   _, err = db.Exec(sqlStatement,username,password,email)
 
   if err != nil {
+    fmt.Println(err)
     return false
   }
 
   _, err = db.Exec(sqlStatement2,username,name)
 
   if(err != nil) {
+    fmt.Println(err)
     return false
   }
 
@@ -75,17 +78,19 @@ func GetUserInfo(username string, db *sql.DB) (bool) {
   var (
     uname string
     name string
-    bio string
-    profileimg string
-    bannerimg string
+    bio sql.NullString
+    profileimg sql.NullString
+    bannerimg sql.NullString
     err error
   )
 
   err = db.QueryRow(sqlStatement,username).Scan(&uname,&name,&bio,&profileimg,&bannerimg)
 
   if(err == sql.ErrNoRows) {
+    fmt.Println(err)
     return false
   } else if (err != nil) {
+    fmt.Println(err)
     return false
   }
 
