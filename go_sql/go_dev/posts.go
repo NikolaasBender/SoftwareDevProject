@@ -1,5 +1,13 @@
 package go_dev
 
-func createPost()
+import (
+  "fmt"
+)
 
-func deletePost()
+func createPost() {
+  fmt.Println("Placeholder")
+}
+
+func deletePost() {
+  fmt.Println("Placeholder")
+}

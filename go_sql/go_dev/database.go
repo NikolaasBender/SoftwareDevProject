@@ -14,7 +14,7 @@ const (
   dbname   = "sdev_db"
 )
 
-func initialize() (*sql.DB) {
+func Initialize() (*sql.DB) {
   psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
     "password=%s dbname=%s sslmode=disable",
     host, port, user, password, dbname)
@@ -29,5 +29,5 @@ func initialize() (*sql.DB) {
     return nil
   }
 
-  return &db
+  return db
 }

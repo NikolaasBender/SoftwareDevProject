@@ -1,13 +1,29 @@
 package go_dev
 
-func createTask(project_name, name)
+import (
+  "fmt"
+)
 
-func addMembers(usernames...)
+func createTask(project_name, name string) {
+  fmt.Println("Placeholder")
+}
 
-func updateStatus(int)
+func addTaskMembers(usernames ...string) {
+  fmt.Println("Placeholder")
+}
 
-func addDescription()
+func updateStatus(int) {
+  fmt.Println("Placeholder")
+}
 
-func dueDate()
+func addDescription() {
+  fmt.Println("Placeholder")
+}
 
-func deleteTask()
+func dueDate() {
+  fmt.Println("Placeholder")
+}
+
+func deleteTask() {
+  fmt.Println("Placeholder")
+}
