@@ -6,20 +6,20 @@ import(
   _ "github.com/lib/pq"
 )
 
-func addUser(username,password,email,name,db) (bool) {
+func addUser(username,password,email,name string,db *sql.DB) (bool) {
 
   sqlStatement := `INSERT INTO user_login (username, password, email)
   VALUES ($1, $2, $3);`
   sqlStatement := `INSERT INTO user_info (username, name)
   VALUES ($1, $4);`
 
-  err = db.QueryRow(sqlStatement,username,password,email)
+  err = *db.QueryRow(sqlStatement,username,password,email)
 
   if err != nil {
     return false
   }
 
-  err = db.QueryRow(sqlStatement,username,name,bio)
+  err = *db.QueryRow(sqlStatement,username,name,bio)
 
   if(err != nil) {
     return false
@@ -28,14 +28,14 @@ func addUser(username,password,email,name,db) (bool) {
   return true
 }
 
-func exists(uername,db) (bool) {
+func exists(uername string,db *sql.DB) (bool) {
 
     sqlStatement := `SELECT username FROM user_login
     WHERE username = $1;`
 
     var uname string
 
-    err = db.QueryRow(sqlStatement,username).Scan(&uname)
+    err = *db.QueryRow(sqlStatement,username).Scan(&uname)
 
     if(err == sql.ErrNoRows) {
       return false
@@ -47,14 +47,14 @@ func exists(uername,db) (bool) {
     return true
 }
 
-func validate(username, password, db) (bool) {
+func validate(username string, password int, db *sql.DB) (bool) {
 
   sqlStatement := `SELECT username FROM user_login
   WHERE username = $1 AND password = $2;`
 
   var uname string
 
-  err = db.QueryRow(sqlStatement,username, password).Scan(&uname)
+  err = *db.QueryRow(sqlStatement,username, password).Scan(&uname)
 
   if(err == sql.ErrNoRows) {
     return false
@@ -66,13 +66,48 @@ func validate(username, password, db) (bool) {
   return true
 }
 
-func getUserInfo(username, db) (bool) {
+func getUserInfo(username string, db *sql.DB) (bool) {
 
   sqlStatement := `SELECT * FROM user_info
   WHERE username = $1;`
 
-  var 
+  var (
+    uname string
+    name string
+    bio string
+    profileimg string
+    bannerimg string
+  )
 
+  err = *db.QueryRow(sqlStatement,username).Scan(&uname,&name,&bio,&profileimg,&bannerimg)
+
+  if(err == sql.ErrNoRows) {
+    return false
+  }
+  else if (err != nil) {
+    return false
+  }
+
+  return
+  //Need to figure out the best way to return some of this information.
 }
 
-func editUserInfo()
+func editUserInfo(username,field, edit string, db *sql.DB) (bool) {
+
+  sqlStatement := `UPDATE user_info
+  SET $1 = $2
+  WHERE username = $3;`
+
+  var uname string
+
+  err = *db.QueryRow(sqlStatement,field,edit,username).Scan(&uname)
+
+  if(err == sql.ErrNoRows) {
+    return false
+  }
+  else if (err != nil) {
+    return false
+  }
+
+  return true
+}
