@@ -1,7 +1,5 @@
 package main
 
-import "html/template"
-
 //"fmt"
 //"html/template"
 //"log"
@@ -9,13 +7,6 @@ import "html/template"
 //"time"
 
 //"github.com/gorilla/mux"
-
-var views = template.Must(template.ParseGlob("view/*"))
-
-type PageVariables struct {
-	Date string
-	Time string
-}
 
 type ContactDetails struct {
 	Username string
@@ -32,9 +23,13 @@ type BigForm struct {
 	textbox   string
 }
 
-type Card struct {
+
+//WE WILL WANT TO GET MORE STUFF ABOUT EACH POST
+type Post struct {
 	Title   string
 	Content string
+	Link    string
+	Type	int
 }
 
 type Page struct {

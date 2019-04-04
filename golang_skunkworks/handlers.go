@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"html/template"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"strings"
@@ -121,8 +120,10 @@ func ViewHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	pathVariables := mux.Vars(r)
-	fmt.Println("VIEW HANDLER: '" + pathVariables["page"] + "'" + "'" + r.URL.Path + "'")
-
+	if debug == true {
+		fmt.Println("VIEW HANDLER: '" + pathVariables["page"] + "'" + "'" + r.URL.Path + "'")
+	}
+	
 	page := ""
 
 	if strings.Contains(pathVariables["page"], ".html") == true {
@@ -131,28 +132,9 @@ func ViewHandler(w http.ResponseWriter, r *http.Request) {
 		page = pathVariables["page"] + ".html"
 	}
 
-	//READ CSS FILE
-	//SAVE ALL OF THAT TO A VAIRAIBLE
-	//SAVE IT IN p
-	//MODIFTY HTML A LITTLE BIT
 
-	err := views.Execute(w, page)
-	if err != nil {
-		log.Fatal("Cannot Get View ", err)
-	}
-}
-
-//=====================================================================================
-//THIS CAN PROBBALY READ IN THE STYLE SHEET BUT NOTHING WANTS TO WORK
-//=====================================================================================
-func readStyle() string {
-	b, err := ioutil.ReadFile("static/style.html") // just pass the file name
-	if err != nil {
-		fmt.Print(err)
-	}
-
-	str := string(b) // convert content to a 'string'
-	return str
+	t, _ := template.ParseFiles(page)
+	t.Execute(w, nil)
 }
 
 //=====================================================================================
@@ -246,4 +228,55 @@ func notFound(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles("404.html")
 
 	t.Execute(w, nil)
+}
+
+
+
+
+//=====================================================================================
+//NAY SORT OF FEED WILL BE HANDLED WITH THIS
+//=====================================================================================
+func FeedHandler(w http.ResponseWriter, r *http.Request) {
+	//POPULATE THE FEED WITH THE RIGHT POSTS
+	if debug == true {
+		fmt.Println("Hit FeedHandler")
+	}
+	session, _ := store.Get(r, "cookie-name")
+
+	if session.Values["authenticated"] != true {
+		http.Redirect(w, r, "/login", http.StatusFound)
+		return
+	}
+
+	
+
+}
+
+
+
+//=====================================================================================
+//ANY SORT OF POST WILL BE HANDLED HERE
+//=====================================================================================
+func PostHnadler(w http.ResponseWriter, r *http.Request) {
+	if debug == true {
+		fmt.Println("Hit PostHandler")
+	}
+	session, _ := store.Get(r, "cookie-name")
+
+	if session.Values["authenticated"] != true {
+		http.Redirect(w, r, "/login", http.StatusFound)
+		return
+	}
+
+	pathVariables := mux.Vars(r)
+
+	k := pathVariables["key"]
+
+	//GET THE POST FROM THE DB
+
+	// p := get from db in the post struct postGet(k)
+
+	t, _ := template.ParseFiles("/view/post.html")
+	t.Execute(w, p)
+
 }
