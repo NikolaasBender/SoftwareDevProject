@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	"html/template"
-	"log"
 	"net/http"
+	"os"
 	"strings"
 
 	"github.com/gorilla/mux"
@@ -46,36 +46,14 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Hit IndexHandler")
 	}
 
-	err := views.Execute(w, "/view/index.html")
-	if err != nil {
-		log.Fatal("Cannot Get View ", err)
-	}
+	t, _ := template.ParseFiles("view/index.html")
+
+	t.Execute(w, t)
 }
 
 //just demo crap
 var titles = []string{"t1", "t2", "t3", "t4"}
 var contents = []string{"c1", "c2", "c3", "c4"}
-
-//=====================================================================================
-//OUR ATTEMPT FOR DEALING WITH CARDS
-//=====================================================================================
-func CardHandler(w http.ResponseWriter, r *http.Request) {
-
-	if debug == true {
-		fmt.Println("Hit CardHandler")
-	}
-
-	session, _ := store.Get(r, "login_cookie")
-	fmt.Println(session.Values["username"])
-	p := Card{Title: "", Content: ""}
-	if session.Values["loggedIn"] != true {
-		p = Card{Title: "you're not logged in", Content: "Please login"}
-	} else {
-		p = Card{Title: "you are logged in", Content: "Your stuff is due soon"}
-	}
-	t, _ := template.ParseFiles("templates/newcard.html")
-	t.Execute(w, p)
-}
 
 //=====================================================================================
 //DEMO FOR DEALING WITH FORMS
@@ -119,22 +97,16 @@ func ViewHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	pathVariables := mux.Vars(r)
-	if debug == true {
-		fmt.Println("VIEW HANDLER: '" + pathVariables["page"] + "'" + "'" + r.URL.Path + "'")
-	}
-	
-	page := ""
+	page := file_finder("view/", w, r)
 
-	if strings.Contains(pathVariables["page"], ".html") == true {
-		page = pathVariables["page"]
-	} else {
-		page = pathVariables["page"] + ".html"
+	if strings.Contains(page, "feed") == true{
+		FeedHandler(w,r)
+		return
 	}
-
 
 	t, _ := template.ParseFiles(page)
 	t.Execute(w, nil)
+
 }
 
 //=====================================================================================
@@ -199,7 +171,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(session.Values["authenticated"])
 	fmt.Println(details)
 
-	http.Redirect(w, r, "/view/userpage.html", http.StatusFound)
+	http.Redirect(w, r, "view/userpage.html", http.StatusFound)
 
 }
 
@@ -230,11 +202,8 @@ func notFound(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, nil)
 }
 
-
-
-
 //=====================================================================================
-//NAY SORT OF FEED WILL BE HANDLED WITH THIS
+//ANAY SORT OF FEED WILL BE HANDLED WITH THIS
 //=====================================================================================
 func FeedHandler(w http.ResponseWriter, r *http.Request) {
 	//POPULATE THE FEED WITH THE RIGHT POSTS
@@ -248,35 +217,77 @@ func FeedHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	
+	page := file_finder("view/", w, r)
+
+	//GET POSTS FOR USER
+	//session.Values["name"]
+
+	feedposts = 
+
+	p := Feed{Title: session.Values["name"], Posts: feedposts}
+	t, _ := template.ParseFiles(page)
 
 }
 
+// //=====================================================================================
+// //ANY SORT OF POST WILL BE HANDLED HERE
+// //=====================================================================================
+// func PostHnadler(w http.ResponseWriter, r *http.Request) {
+// 	if debug == true {
+// 		fmt.Println("Hit PostHandler")
+// 	}
+// 	session, _ := store.Get(r, "cookie-name")
+
+// 	if session.Values["authenticated"] != true {
+// 		http.Redirect(w, r, "/login", http.StatusFound)
+// 		return
+// 	}
+
+// 	pathVariables := mux.Vars(r)
+
+// 	k := pathVariables["key"]
+
+// 	//GET THE POST FROM THE DB
+
+// 	// p := get from db in the post struct postGet(k)
+
+// 	t, _ := template.ParseFiles("/view/post.html")
+// 	t.Execute(w, p)
+
+// }
 
 
-//=====================================================================================
-//ANY SORT OF POST WILL BE HANDLED HERE
-//=====================================================================================
-func PostHnadler(w http.ResponseWriter, r *http.Request) {
-	if debug == true {
-		fmt.Println("Hit PostHandler")
-	}
-	session, _ := store.Get(r, "cookie-name")
-
-	if session.Values["authenticated"] != true {
-		http.Redirect(w, r, "/login", http.StatusFound)
-		return
-	}
+func file_finder(folder string, w http.ResponseWriter, r *http.Request) string {
 
 	pathVariables := mux.Vars(r)
+	if debug == true {
+		fmt.Println("File Finder: '" + pathVariables["page"] + "'")
+	}
 
-	k := pathVariables["key"]
+	page := ""
 
-	//GET THE POST FROM THE DB
+	if strings.Contains(pathVariables["page"], ".html") == true {
+		page = folder + pathVariables["page"]
+	} else {
+		page = folder + pathVariables["page"] + ".html"
+	}
 
-	// p := get from db in the post struct postGet(k)
+	if debug == true {
+		fmt.Println("corrected path: '" + page + "'")
+	}
 
-	t, _ := template.ParseFiles("/view/post.html")
-	t.Execute(w, p)
+	if _, err := os.Stat(page); err == nil {
+		// path/to/whatever exists
+		return page
 
+	} else if os.IsNotExist(err) {
+		// path/to/whatever does *not* exist
+		fmt.Println("Can't find file")
+		return ""
+	} else {
+		// Schrodinger: file may or may not exist. See err for details.
+		// Therefore, do *NOT* use !os.IsNotExist(err) to test for file existence
+		fmt.Println(err)
+		return ""
+	}
 }

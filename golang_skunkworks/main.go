@@ -24,7 +24,6 @@ func newRouter() *mux.Router {
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static/"))))
 	r.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", http.FileServer(http.Dir("assets/"))))
 
-
 	//ALL THE REST OF THESE ARE FINE TO MESS WITH
 	//VIEWS SUB ROUTER
 	s := r.PathPrefix("/view").Subrouter()
@@ -32,9 +31,9 @@ func newRouter() *mux.Router {
 	s.HandleFunc("/{page}", ViewHandler)
 
 	//THE POST HANDLER
-	p := r.PathPrefix("/post").Subrouter()
-	p.HandleFunc("/", PostHandler)
-	p.HandleFunc("/{key}", PostHandler)
+	// p := r.PathPrefix("/post").Subrouter()
+	// p.HandleFunc("/", PostHandler)
+	// p.HandleFunc("/{key}", PostHandler)
 
 	//SESSIONS AND STUFF
 	r.HandleFunc("/secret", secret)

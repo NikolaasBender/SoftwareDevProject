@@ -23,15 +23,15 @@ type BigForm struct {
 	textbox   string
 }
 
-
 //WE WILL WANT TO GET MORE STUFF ABOUT EACH POST
 type Post struct {
 	Title   string
 	Content string
 	Link    string
-	Type	int
+	Type    int
 }
 
-type Page struct {
-	style string
+type Feed struct {
+	Title string
+	Posts map[string]Post
 }
