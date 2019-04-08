@@ -184,12 +184,23 @@ a {
   background-image: linear-gradient(127deg,#FFC24C,#FF9551,#F66B61,#D84975,#AA3884,#6D3489,#003281);
   height: 30vh;
   z-index: 0;
-  border-bottom: 25px solid #fff;
+  border-bottom: 10px solid #fff;
+}
+
+#user-navbar{
+  border: 1px solid black;
+  background-color: #FF2D36;
+  width: 100% !important;
+  color: #fff;
+}
+
+#user-navbar a {
+  color: #fff !important;
 }
 
 #sidebar-container {
   background-color: #FF2D36;
-  width: 35vw;
+  width: 350px;
   height: 80vh;
   z-index: 1;
 }
@@ -198,8 +209,8 @@ a {
   position: relative;
   top: -15vh;
   background-image: linear-gradient(127deg,#FFC24C,#FF9551,#F66B61,#D84975,#AA3884,#6D3489,#003281);
-  height: 300px;
-  width: 300px;
+  height: 200px;
+  width: 200px;
   border: 10px solid #fff;
 }
 
@@ -213,12 +224,13 @@ a {
 }
 
 #sidebar-contents h1 {
-  font-size: 3.5em;
+  font-size: 2.5em;
   font-weight: 900;
   padding-top: 20px;
 }
 
 #sidebar-contents h3 {
+  font-size: 1.5em;
   font-style: italic;
   font-weight: lighter;
   padding-top: 10px;
@@ -233,7 +245,11 @@ a {
  background-color: #fff;
  height: 1000px;
  align-items: center;
- margin-top: 5vh;
+ padding: 0px;
+}
+
+#body-container .navbar-expand-xl {
+  padding: 0px !important;
 }
 
 #sample-item-1 {
