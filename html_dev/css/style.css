@@ -371,3 +371,63 @@ a {
   margin-bottom: 20px;
   font-size: 1.2em;
 }
+
+/*~~~~~~~~~~~~ PROJECTPAGE CSS STARTS HERE ~~~~~~~~~~~~*/
+
+#taskbar {
+  height: 10vh;
+  border-bottom: 3px solid #FF2D36;
+}
+
+#project-sidebar {
+  width: 200px;
+  height: 100vh;
+  background-color: #fff;
+  border-right: 3px solid #FF2D36;
+}
+
+#project-body {
+  background-image: linear-gradient(0deg,#e0e0e0,#a0a0a0);
+  margin: 0px;
+  padding: 20px;
+  width: 100vw;
+}
+#kanban {
+  font-family: "Raleway";
+
+}
+
+.kanban-bar {
+  background-image: linear-gradient(0deg,#FF2D36,#E0E0E0,#E0E0E0,#E0E0E0,#FFFFFF);
+  color: #fff;
+  height: 85vh;
+  border: 10px solid #FF2D36;
+  padding: 0px !important;
+}
+
+.kanban-bar h1 {
+  background-color: #FF2D36;
+  font-weight: bolder;
+  padding: 10px;
+  padding-top: 0px !important;
+  border-bottom: 10px solid #fff;
+}
+
+.task-area {
+  overflow-y: scroll;
+  height: 90% !important;
+  border: 1px solid black;
+  padding: 10px;
+}
+
+#todo {
+
+}
+
+#done {
+
+}
+
+#working {
+
+}
