@@ -188,18 +188,43 @@ a {
 }
 
 #user-navbar{
-  border: 1px solid black;
-  background-color: #FF2D36;
+  margin-top: 10px;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
   width: 100% !important;
-  color: #fff;
+  color: #FF2D36;
 }
 
 #user-navbar a {
+  position: relative;
+  left: 33.33%;
+  color: #FF2D36 !important;
+  border: 3px solid #FF2D36;
+  width: 175px;
+  padding: 5px;
+}
+
+#user-navbar a:hover {
   color: #fff !important;
+  border: 3px solid #FF2D36;
+  background-color: #FF2D36;
+}
+
+#user-navbar-button {
+  text-align: center;
+  font-size: 1.3em;
+  font-weight: lighter;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  margin: 8px;
+  width: 150px !important;
 }
 
 #sidebar-container {
-  background-color: #FF2D36;
+  background-color: #fff;
+  border-right: 3px solid #FF2D36;
   width: 350px;
   height: 80vh;
   z-index: 1;
@@ -219,7 +244,7 @@ a {
   top: -15vh;
   height: 100vh;
   width: 90%;
-  color: #fff;
+  color: #FF2D36;
   font-family: "Raleway";
 }
 
@@ -250,6 +275,22 @@ a {
 
 #body-container .navbar-expand-xl {
   padding: 0px !important;
+}
+
+#placeholder {
+  text-align: center;
+  justify-content: center !important;
+  align-items: center !important;
+  color: #e0e0e0;
+  font-weight: bolder;
+  font-style: italic;
+  width: 100%;
+  height: 100%;
+}
+
+#placeholder h1 {
+  position: relative;
+  top: 25%;
 }
 
 #sample-item-1 {
@@ -391,8 +432,25 @@ a {
 /*~~~~~~~~~~~~ PROJECTPAGE CSS STARTS HERE ~~~~~~~~~~~~*/
 
 #taskbar {
-  height: 10vh;
+  height: 13vh;
   border-bottom: 3px solid #FF2D36;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+#project-logo {
+  height: 80px;
+  width: 80px;
+  background-image: linear-gradient(127deg,#FFC24C,#FF9551,#F66B61,#D84975,#AA3884,#6D3489,#003281);
+  border-left: 10px solid #FF2D36;
+}
+
+#project-name {
+  font-size: 1.5em;
+}
+
+#project-toolbar {
+  width: 100%;
 }
 
 #project-sidebar {
@@ -413,17 +471,29 @@ a {
 
 }
 
+.project-nav-item {
+  margin: 8px;
+}
+
+.project-taskbar-button {
+  border: 3px solid #FF2D36;
+  padding: 3px !important;
+  width: 100px;
+  text-align: center;
+}
+
 .kanban-bar {
-  background-image: linear-gradient(0deg,#FF2D36,#E0E0E0,#E0E0E0,#E0E0E0,#FFFFFF);
+  /*background-image: linear-gradient(0deg,#FF2D36,#E0E0E0,#E0E0E0,#E0E0E0,#FFFFFF);*/
+  background-color: #fff;
   color: #fff;
   height: 85vh;
-  border: 10px solid #FF2D36;
+  border: 5px solid #FF2D36;
   padding: 0px !important;
 }
 
 .kanban-bar h1 {
   background-color: #FF2D36;
-  font-weight: bolder;
+  font-weight: lighter;
   padding: 10px;
   padding-top: 0px !important;
   border-bottom: 10px solid #fff;
