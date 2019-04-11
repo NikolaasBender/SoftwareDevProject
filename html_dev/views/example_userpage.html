@@ -43,7 +43,13 @@
       </div>
       <div class="container-fluid" id="body-container">
         <!-- FILLED DYNAMICALLY -->
+        <div class="tab">
+          <button class="tablinks">Timeline</button>
+          <button class="tablinks">Pins</button>
+        </div>
+
         <!-- Task bar posted before comments -->
+
         <div class="container" id="sample-item-1">
           <div class="container" id="sample-item-1-header">
 
@@ -65,7 +71,7 @@
                 <option id="3">3</option>
                 <option id="Optional">Optional</option>
             </select>
-            <span onclick="newElement()" class="addBtn">Add</span>
+            <button onclick="newElement()" class="addBtn">Add</button>
 
           <ul id="myUL">
           </ul>
@@ -267,6 +273,15 @@
     }
   }
   </script>
+
+  <script>
+function myFunction() {
+  var x = document.getElementsByClassName("btn btn-comment");
+  var comment = document.createElement("comment");
+  comment.text = "<input type="text" id="myInput" placeholder="Comment...">";
+  x.add(comment);
+}
+</script>
   <!-- additional js -->
 
 </html>
