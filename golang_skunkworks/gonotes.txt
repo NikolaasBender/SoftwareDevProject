@@ -36,3 +36,9 @@ https://stackoverflow.com/questions/36323232/golang-css-files-are-being-sent-wit
 DONT SET ANY WRITE HEADERS!!!
 w.WriteHeader(http.StatusOK)
 THIS IS THE MARK OF THE BEAST!!!
+
+
+
+delpoy on google
+https://medium.com/google-cloud/building-a-go-web-app-from-scratch-to-deploying-on-google-cloud-part-1-building-a-simple-go-aee452a2e654
+https://medium.com/google-cloud/building-a-go-web-app-from-scratch-to-deploying-on-google-cloud-part-2-deploying-our-go-app-on-a07285dfa6a9https://medium.com/google-cloud/building-a-go-web-app-from-scratch-to-deploying-on-google-cloud-part-2-deploying-our-go-app-on-a07285dfa6a9
