@@ -55,7 +55,7 @@ func main() {
 	//WE NEED A ROUTER
 	r := newRouter()
 
-	port := ":80"
+	port := ":8080"
 
 	fmt.Println("go to ->  http://localhost" + port)
 	//RUNS THE SERVER
