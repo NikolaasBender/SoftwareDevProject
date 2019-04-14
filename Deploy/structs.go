@@ -1,5 +1,6 @@
 package main
 
+var db = go_dev.Initialize()
 
 type ContactDetails struct {
 	Username string

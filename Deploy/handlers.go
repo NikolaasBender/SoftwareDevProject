@@ -6,10 +6,12 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"strconv"
 
 	"github.com/gorilla/mux"
 	"github.com/gorilla/sessions"
-	"github.com/SoftwareDevProject/go_sql/go_dev"
+	""
+
 )
 
 // db = go_dev.Initialize()
@@ -149,32 +151,28 @@ func login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	
 	session, _ := store.Get(r, "cookie-name")
 
-	//GET LOGIN INFO
-	details := ContactDetails{
-		Username: r.FormValue("email"),
-		Password: r.FormValue("pwd"),
+	pwint, _ := strconv.Atoi(r.FormValue("pwd"))
+	// Authentication goes here
+	if(go_dev.Authenticate(r.FormValue("email"), pwint)) exists in db == true{
+		session.Values["authenticated"] = true
+		http.Redirect(w, r, "/view/index.html", http.StatusFound)
+	}else{
+		session.Values["authenticated"] = false
+		t.Execute(w, nil)
 	}
 
-	// Authentication goes here
-	// if(password and username) exists in db == true{
-	//	session.Values["authenticated"] = true
-	//	http.Redirect(w, r, "/view/index.html", http.StatusFound)
-	// }else{
-	// 	session.Values["authenticated"] = false
-	//	t.Execute(w, nil)
-	// }
-
 	// Set user as authenticated
-	session.Values["authenticated"] = true
-	session.Values["name"] = r.FormValue("username")
-	session.Save(r, w)
+	// session.Values["authenticated"] = true
+	// session.Values["name"] = r.FormValue("username")
+	// session.Save(r, w)
 
-	fmt.Println(session.Values["authenticated"])
-	fmt.Println(details)
+	// fmt.Println(session.Values["authenticated"])
+	// fmt.Println(details)
 
-	http.Redirect(w, r, "view/userpage.html", http.StatusFound)
+	// http.Redirect(w, r, "view/userpage.html", http.StatusFound)
 
 }
 
