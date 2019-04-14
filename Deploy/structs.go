@@ -1,12 +1,5 @@
 package main
 
-//"fmt"
-//"html/template"
-//"log"
-//"net/http"
-//"time"
-
-//"github.com/gorilla/mux"
 
 type ContactDetails struct {
 	Username string

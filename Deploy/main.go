@@ -17,7 +17,6 @@ import (
 
 func newRouter() *mux.Router {
 	r := mux.NewRouter()
-	r.Host("lab-co.org")
 
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	//THIS IS 100% VOODOO - DONT FUCKING TOUCH THIS UNDER ANY CIRCUMSTANCES
