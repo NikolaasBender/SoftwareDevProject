@@ -9,7 +9,10 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/gorilla/sessions"
+	"github.com/SoftwareDevProject/go_sql/go_dev"
 )
+
+// db = go_dev.Initialize()
 
 // var templates = template.Must(template.ParseGlob("templates/*"))
 
