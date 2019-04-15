@@ -8,6 +8,7 @@
     <title>[Username] at [ProjectName]</title>
 
     <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/main.js"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
@@ -36,6 +37,7 @@
           <p id="user-description-long">
             No description set.
           </p>
+          <a class="btn button-project" href="#" onmouseover="new_project_mouse_in()" onmouseout="new_project_mouse_out()" id="new-project">New Project</a>
         </div>
       </div>
       <div class="container-fluid" id="body-container">
@@ -49,6 +51,9 @@
             </li>
             <li class="nav-item" id="user-navbar-button">
               <a class="nav-link" href="#" >My Pins</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-options" href="#"><i class="fas fa-cog"></i></a>
             </li>
           </ul>
         </div>

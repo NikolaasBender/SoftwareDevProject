@@ -1,2 +1,6 @@
 THE GOLANG PAGE ABOUT SQL
 https://golang.org/pkg/database/sql/
+
+
+you're gonna need this for cloud SQL
+https://cloud.google.com/appengine/docs/flexible/go/using-cloud-sql-postgres

@@ -99,8 +99,8 @@ func ViewHandler(w http.ResponseWriter, r *http.Request) {
 
 	page := file_finder("view/", w, r)
 
-	if strings.Contains(page, "feed") == true{
-		FeedHandler(w,r)
+	if strings.Contains(page, "feed") == true {
+		FeedHandler(w, r)
 		return
 	}
 
@@ -217,15 +217,13 @@ func FeedHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	page := file_finder("view/", w, r)
+	// page := file_finder("view/", w, r)
 
-	//GET POSTS FOR USER
-	//session.Values["name"]
+	// //GET POSTS FOR USER
+	// feedposts = getTasks(session.Values["name"])
 
-	feedposts = 
-
-	p := Feed{Title: session.Values["name"], Posts: feedposts}
-	t, _ := template.ParseFiles(page)
+	// p := Feed{Title: session.Values["name"], Posts: feedposts}
+	// t, _ := template.ParseFiles(page)
 
 }
 
@@ -255,7 +253,6 @@ func FeedHandler(w http.ResponseWriter, r *http.Request) {
 // 	t.Execute(w, p)
 
 // }
-
 
 func file_finder(folder string, w http.ResponseWriter, r *http.Request) string {
 

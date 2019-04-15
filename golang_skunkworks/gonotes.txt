@@ -36,3 +36,8 @@ https://stackoverflow.com/questions/36323232/golang-css-files-are-being-sent-wit
 DONT SET ANY WRITE HEADERS!!!
 w.WriteHeader(http.StatusOK)
 THIS IS THE MARK OF THE BEAST!!!
+
+
+
+deploy to gcloud
+https://stackoverflow.com/questions/15723911/google-app-engine-get-index-html-http-1-1-404

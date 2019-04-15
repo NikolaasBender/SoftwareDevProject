@@ -17,6 +17,7 @@ import (
 
 func newRouter() *mux.Router {
 	r := mux.NewRouter()
+	r.Host("lab-co.org")
 
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	//THIS IS 100% VOODOO - DONT FUCKING TOUCH THIS UNDER ANY CIRCUMSTANCES
@@ -54,7 +55,7 @@ func main() {
 	//WE NEED A ROUTER
 	r := newRouter()
 
-	port := ":5050"
+	port := ":8080"
 
 	fmt.Println("go to ->  http://localhost" + port)
 	//RUNS THE SERVER
