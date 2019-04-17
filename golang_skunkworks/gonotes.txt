@@ -41,3 +41,9 @@ THIS IS THE MARK OF THE BEAST!!!
 
 deploy to gcloud
 https://stackoverflow.com/questions/15723911/google-app-engine-get-index-html-http-1-1-404
+
+
+
+this might be helpful for the feeds
+https://github.com/gorilla/feeds
+https://getstream.io/docs/go/
