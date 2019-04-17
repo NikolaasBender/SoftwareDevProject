@@ -573,3 +573,61 @@ a {
 #working {
 
 }
+
+/*~~~~~~~~~~~~ TASKPAGE CSS STARTS HERE ~~~~~~~~~~~~*/
+
+#task-body {
+  font-family: "Raleway";
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 0px;
+  border: 3px solid #FF2D36;
+}
+
+#task-body h1 {
+  width: 100%;
+  padding: 10px;
+  margin: 0px;
+  background-color: #FF2D36;
+  color: #fff;
+}
+
+#task-body h3 {
+  color: #fff;
+  font-size: 1.5em;
+  position: relative;
+  right: -75%;
+  top: -50px;
+  height: 0px;
+}
+
+#members {
+  height: 50vh;
+  padding: 10px;
+}
+
+#members li {
+  background-color: #FF2D36;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#details {
+  height: 50vh;
+  padding: 10px;
+}
+
+#comments-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid #e0e0e0;
+  margin-top: 30px;
+}
+
+#comments-body h1 {
+  font-style: italic;
+  color: #e0e0e0;
+}
