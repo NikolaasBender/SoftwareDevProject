@@ -5,3 +5,31 @@ the userpage.
 
 
 show a bunch of posts
+
+NEEDED HANDLERS:
+
+-USERPAGE
+.display-name >> returns a string with current logged in user name
+.display-email >> returns a string with current logged in user email
+.display-info >> returns a string of the users bio
+.feed >> this builds all cards in HTML into a long string to be loaded into the page body
+.tasks >> same as feed but only loads tasks
+.pins >> same as feed but only loads pins
+.projects >> returns concatonated HTML string of buttons, one div for each project the user is in
+
+-PROJECT PAGE
+.project-name >> returns the project name
+.project-img >> NOT NESSESARY
+.fill-todo >> fills the to do box with all tasks card-lets marked to do
+.fill-working >> see above, but for tasks in progress
+.fill-done >> see above, but for finished tasks
+.get-users >> returns concatonated HTML in the form of an unordered list, with all users assigned to the project
+
+-TASK PAGE
+.task-name >> returns the tasks name (for use in the browser tab. not an essential function)
+.fill-task >> populates the body of the page with the task information
+.fill-comments >> returns concatonated HTML string of all comments associated with a post
+
+-UNIVERSAL
+.post-comment >> sends form information to the server, creates a new comment object (or whatever) associated with the task
+.add-pin >> adds user to list of coment objects associated user pins (or whatever)
