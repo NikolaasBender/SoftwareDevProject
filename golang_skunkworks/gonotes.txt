@@ -47,3 +47,5 @@ https://stackoverflow.com/questions/15723911/google-app-engine-get-index-html-ht
 this might be helpful for the feeds
 https://github.com/gorilla/feeds
 https://getstream.io/docs/go/
+https://stackoverflow.com/questions/24556001/how-to-range-over-slice-of-structs-instead-of-struct-of-slices
+https://gowebexamples.com/templates/

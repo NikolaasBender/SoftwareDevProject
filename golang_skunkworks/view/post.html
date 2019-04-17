@@ -1,4 +1,15 @@
 <!DOCTYPE html>
+<head>
+    <script type="text/javascript" charset="utf8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+</head>
+<h1>post page</h1>
 
-<h1>{{.Title}}</h1>
-<p>{{.Content}}</p>
+<div class="item">
+    <h3 class="name">{{.Title}}</h3>
+    <p class="content">{{.Content}}</p>
+    <p>{{.Type}}</p>
+    <p>{{.Link}}</p>
+</div>

@@ -7,27 +7,14 @@
 
 <!-- https://pythonprogramming.net/go/template-news-aggregator-go-language-programming-tutorial/?completed=/go/templating-webapp-go-language-programming-tutorial/ -->
 
-<h1>{{.Title}}</h1>
-
-<table id="fancytable" class="display">
-    <col width="35%">
-    <col width="65%">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Keywords</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{ range $key, $value := .News }}
-        <tr>
-            <td><a href="{{ $value.Location }}" target='_blank'>{{ $key }}</td>
-            <td>{{ $value.Keyword }}</td>
-        </tr>
-        {{ end }}
-    </tbody>
-</table>
-
-<script>$(document).ready(function () {
-        $('#fancytable').DataTable();
-    });</script>
+<h1>Feed sample page</h1>
+<div>
+    {{range .}}
+        <div class="item">
+            <h3 class="name">{{.Title}}</h3>
+            <p class="content">{{.Content}}</p>
+            <p>{{.Type}}</p>
+            <p>{{.Link}}</p>
+        </div>
+    {{end}}
+</div>

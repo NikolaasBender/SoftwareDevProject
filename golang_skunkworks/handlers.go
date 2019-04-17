@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 
 	"github.com/gorilla/mux"
@@ -220,39 +221,45 @@ func FeedHandler(w http.ResponseWriter, r *http.Request) {
 	page := file_finder("view/", w, r)
 
 	//GET POSTS FOR USER
-	feedposts = go_dev.getTasks(session.Values["name"])
+	feedposts := postTests
 
-	p := Feed{Title: session.Values["name"], Posts: feedposts}
+	//p := Feed{Title: "you", Posts: feedposts}
 	t, _ := template.ParseFiles(page)
+
+	t.Execute(w, feedposts)
 
 }
 
-// //=====================================================================================
-// //ANY SORT OF POST WILL BE HANDLED HERE
-// //=====================================================================================
-// func PostHnadler(w http.ResponseWriter, r *http.Request) {
-// 	if debug == true {
-// 		fmt.Println("Hit PostHandler")
-// 	}
-// 	session, _ := store.Get(r, "cookie-name")
+//=====================================================================================
+//ANY SORT OF POST WILL BE HANDLED HERE
+//=====================================================================================
+func PostHandler(w http.ResponseWriter, r *http.Request) {
+	if debug == true {
+		fmt.Println("Hit PostHandler")
+	}
+	session, _ := store.Get(r, "cookie-name")
 
-// 	if session.Values["authenticated"] != true {
-// 		http.Redirect(w, r, "/login", http.StatusFound)
-// 		return
-// 	}
+	if session.Values["authenticated"] != true {
+		http.Redirect(w, r, "/login", http.StatusFound)
+		return
+	}
 
-// 	pathVariables := mux.Vars(r)
+	pathVariables := mux.Vars(r)
 
-// 	k := pathVariables["key"]
+	k, _ := strconv.Atoi(pathVariables["key"])
 
-// 	//GET THE POST FROM THE DB
+	//GET THE POST FROM THE DB
 
-// 	// p := get from db in the post struct postGet(k)
+	p := postTests[k]
 
-// 	t, _ := template.ParseFiles("/view/post.html")
-// 	t.Execute(w, p)
+	if debug == true {
+		fmt.Println(p)
+	}
 
-// }
+	t, _ := template.ParseFiles("/view/post.html")
+	t.Execute(w, p)
+
+}
 
 func file_finder(folder string, w http.ResponseWriter, r *http.Request) string {
 

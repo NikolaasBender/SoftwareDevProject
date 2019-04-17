@@ -33,5 +33,20 @@ type Post struct {
 
 type Feed struct {
 	Title string
-	Posts map[string]Post
+	Posts []Post
+}
+
+var postTests = []Post{
+	Post{
+		Title:   "Test title 1",
+		Content: "hi i am content 1",
+		Link:    "/post/0",
+		Type:    1,
+	},
+	Post{
+		Title:   "Test title 2",
+		Content: "hi i am content 2",
+		Link:    "/post/1",
+		Type:    1,
+	},
 }
