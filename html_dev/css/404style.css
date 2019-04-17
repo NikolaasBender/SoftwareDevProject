@@ -41,13 +41,13 @@ body {
 
 .notfound .notfound-404 img {
   background-image: none;
-  height: 150px;
-  width: ]150px;
+  height: 500px;
+  width: 500px;
   margin: 0px;
   color: #FF2D36;
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 20%;
   -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
@@ -65,7 +65,7 @@ body {
   margin: auto;
   display: inline-block;
   position: absolute;
-  bottom: 0px;
+  bottom: -70%;
   left: 0;
   right: 0;
 }
@@ -79,7 +79,7 @@ body {
   color: #fff;
   text-transform: uppercase;
   padding: 13px 23px;
-  background: #ff6300;
+  background: #FF2D36;
   font-size: 18px;
   -webkit-transition: 0.2s all;
   transition: 0.2s all;
