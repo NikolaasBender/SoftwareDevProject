@@ -223,6 +223,8 @@ func FeedHandler(w http.ResponseWriter, r *http.Request) {
 	//GET POSTS FOR USER
 	feedposts := postTests
 
+	fmt.Println(postTests)
+
 	//p := Feed{Title: "you", Posts: feedposts}
 	t, _ := template.ParseFiles(page)
 

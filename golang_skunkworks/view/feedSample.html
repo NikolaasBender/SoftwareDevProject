@@ -6,15 +6,20 @@
 </head>
 
 <!-- https://pythonprogramming.net/go/template-news-aggregator-go-language-programming-tutorial/?completed=/go/templating-webapp-go-language-programming-tutorial/ -->
+{{ $Tasks := .Tasks}}
+
 
 <h1>Feed sample page</h1>
 <div>
-    {{range .}}
+    {{range $task := $Tasks}}
         <div class="item">
-            <h3 class="name">{{.Title}}</h3>
-            <p class="content">{{.Content}}</p>
-            <p>{{.Type}}</p>
-            <p>{{.Link}}</p>
+            <h3 class="name">{{$task.Title}}</h3>
+            <p class="content">{{$task.Content}}</p>
+            <p>{{$task.Type}}</p>
+            <p>{{$task.Link}}</p>
+            {{range $comm := $Tasks.Comments}}
+                <p>{{$comm.shmoo}}</p>
+            {{end}}
         </div>
     {{end}}
 </div>

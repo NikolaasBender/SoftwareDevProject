@@ -8,6 +8,24 @@ package main
 
 //"github.com/gorilla/mux"
 
+type UserPage struct {
+	display_name  string
+	display_email string
+	display_info  string
+	feed          []Post
+	tasks         []Task
+	pins          []Task
+	projects      []Project
+}
+
+type ProjectPage struct {
+	project_name string
+	todo         []Task
+	working      []Task
+	done         []Task
+	users        []User
+}
+
 type ContactDetails struct {
 	Username string
 	Password string
@@ -24,29 +42,59 @@ type BigForm struct {
 }
 
 //WE WILL WANT TO GET MORE STUFF ABOUT EACH POST
-type Post struct {
-	Title   string
-	Content string
-	Link    string
-	Type    int
+type Task struct {
+	task_name string
+	fill_task string
+	Comments  []Comment
+}
+
+type Comment struct {
+	shmoo string
 }
 
 type Feed struct {
-	Title string
-	Posts []Post
+	Tasks []Task
 }
 
-var postTests = []Post{
-	Post{
+var postTests = []Task{
+	Task{
 		Title:   "Test title 1",
 		Content: "hi i am content 1",
 		Link:    "/post/0",
 		Type:    1,
+		Comments: []Comment{
+			Comment{
+				shmoo: "Comment 1 for task 1",
+			},
+			Comment{
+				shmoo: "Comment 2 for task 1",
+			},
+			Comment{
+				shmoo: "Comment 3 for task 1",
+			},
+			Comment{
+				shmoo: "Comment 4 for task 1",
+			},
+		},
 	},
-	Post{
+	Task{
 		Title:   "Test title 2",
 		Content: "hi i am content 2",
 		Link:    "/post/1",
 		Type:    1,
+		Comments: []Comment{
+			Comment{
+				shmoo: "Comment 1 for task 2",
+			},
+			Comment{
+				shmoo: "Comment 2 for task 2",
+			},
+			Comment{
+				shmoo: "Comment 3 for task 2",
+			},
+			Comment{
+				shmoo: "Comment 4 for task 2",
+			},
+		},
 	},
 }
