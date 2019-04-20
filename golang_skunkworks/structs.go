@@ -18,12 +18,22 @@ type UserPage struct {
 	projects      []Project
 }
 
-type ProjectPage struct {
+type Post struct {
+	Title   string
+	Content string
+}
+
+type Project struct {
 	project_name string
 	todo         []Task
 	working      []Task
 	done         []Task
 	users        []User
+}
+
+type User struct {
+	username string
+	email    string
 }
 
 type ContactDetails struct {
@@ -45,6 +55,7 @@ type BigForm struct {
 type Task struct {
 	task_name string
 	fill_task string
+	key       string
 	Comments  []Comment
 }
 
@@ -58,10 +69,9 @@ type Feed struct {
 
 var postTests = []Task{
 	Task{
-		Title:   "Test title 1",
-		Content: "hi i am content 1",
-		Link:    "/post/0",
-		Type:    1,
+		task_name: "Test title 1",
+		fill_task: "hi i am content 1",
+		key:       "1",
 		Comments: []Comment{
 			Comment{
 				shmoo: "Comment 1 for task 1",
@@ -78,10 +88,9 @@ var postTests = []Task{
 		},
 	},
 	Task{
-		Title:   "Test title 2",
-		Content: "hi i am content 2",
-		Link:    "/post/1",
-		Type:    1,
+		task_name: "Test title 2",
+		fill_task: "hi i am content 2",
+		key:       "2",
 		Comments: []Comment{
 			Comment{
 				shmoo: "Comment 1 for task 2",
