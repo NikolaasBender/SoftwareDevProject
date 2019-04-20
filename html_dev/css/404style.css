@@ -55,7 +55,7 @@ body {
 
 .notfound .notfound-404 h2 {
   background-image: none;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 28px;
   font-weight: 400;
   text-transform: uppercase;
@@ -70,13 +70,17 @@ body {
   right: 0;
 }
 
+.notfound .notfound-404 a {
+  color: #fff !important;
+}
+
 .notfound a {
   background-image: none;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Raleway', sans-serif;
   display: inline-block;
   font-weight: 700;
   text-decoration: none;
-  color: #fff;
+  color: #fff !important;
   text-transform: uppercase;
   padding: 13px 23px;
   background: #FF2D36;

@@ -5,6 +5,10 @@ a {
   color: #FF2D36 !important;
 }
 
+.navbar-brand img {
+  width: 10vw;
+}
+
 .wrapper {
     display: flex;
     width: 100%;
@@ -138,7 +142,7 @@ a {
 	padding-left: 30px;
 	padding-right: 30px;
 	font-size: 2.0em;
-	color: #212121;
+	color: #4F323F;
 }
 
 #Footer {
@@ -176,6 +180,15 @@ a {
   color: #FF2D36 !important;
   border-width: medium !important;
 
+}
+
+#forms {
+  width: 30vw;
+}
+
+#signinsheet .info-form {
+  display: flex;
+  justify-content: center;
 }
 
 /*~~~~~~~~~~~~ USERPAGE CSS STARTS HERE ~~~~~~~~~~~~*/
@@ -297,6 +310,7 @@ a {
   font-weight: lighter;
   padding-top: 10px;
   padding-bottom: 10px;
+  color: #7f7f7f;
 }
 
 #sidebar-contents p {
@@ -558,7 +572,7 @@ a {
   text-align: center !important;
   word-wrap: break-word !important;
   width: 150px;
-  height: 50px; 
+  height: 50px;
   border: 3px solid #FF2D36 !important;
   border-radius: 0px !important;
   margin-top: 20px;
@@ -639,4 +653,103 @@ a {
 #comments-body h1 {
   font-style: italic;
   color: #e0e0e0;
+}
+
+/*~~~~~~~~~~~~ 404PAGE CSS STARTS HERE ~~~~~~~~~~~~*/
+
+#notfound {
+  position: relative;
+  height: 100vh;
+}
+
+#notfound .notfound {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.notfound {
+  background-image: none;
+  max-width: 520px;
+  width: 100%;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.notfound .notfound-404 {
+  background-image: none;
+  position: relative;
+  height: 200px;
+  margin: 0px auto 20px;
+  z-index: -1;
+}
+
+.notfound .notfound-404 img {
+  background-image: none;
+  height: 500px;
+  width: 500px;
+  margin: 0px;
+  color: #FF2D36;
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.notfound .notfound-404 h2 {
+  background-image: none;
+  font-family: 'Raleway', sans-serif;
+  font-size: 28px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  padding: 10px 5px;
+  margin: auto;
+  display: inline-block;
+  position: absolute;
+  bottom: -70%;
+  left: 0;
+  right: 0;
+}
+
+.notfound .notfound-404 h3 {
+  background-image: none;
+  font-family: 'Raleway', sans-serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: #FF2D36;
+  background: #fff;
+  padding: 10px 5px;
+  margin: auto;
+  display: inline-block;
+  position: absolute;
+  bottom: -105%;
+  left: 0;
+  right: 0;
+}
+
+.notfound a {
+  background-image: none;
+  font-family: 'Raleway', sans-serif;
+  display: inline-block;
+  font-weight: 700;
+  text-decoration: none;
+  color: #fff !important;
+  text-transform: uppercase;
+  padding: 13px 23px;
+  background: #FF2D36;
+  font-size: 18px;
+  -webkit-transition: 0.2s all;
+  transition: 0.2s all;
+}
+
+.notfound a:hover {
+  background-image: none;
+  color: #FF2D36;
+  background: #211b19;
 }
